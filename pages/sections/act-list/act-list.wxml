@@ -1,0 +1,141 @@
+<!--pages/sections/act-list/act-list.wxml-->
+
+
+
+<!--组织名称-->
+<view class="org-header">
+    <text class="text">{{orgName}}</text>
+    <image class="picture" src="{{orgPicUrl && orgPicUrl != '' ? orgPicUrl : '/icon/person.png'}}"></image>
+    <view wx:if="{{isRealOrg && !hasFollowed}}" hover-class="weui-cell_active">
+      <button class='followBtn' bindtap='followOrg'>关注</button>
+    </view>
+    <view wx:elif="{{isRealOrg && hasFollowed}}" hover-class="weui-cell_active">
+      <button class='followBtn' bindtap='unFollowOrg'>取消关注</button>
+    </view>
+    <view wx:elif="{{orgId == -1 && !hasFollowed}}" hover-class="weui-cell_active">
+      <button class='followBtn' bindtap='followBoya'>关注</button>
+    </view>
+    <view wx:elif="{{orgId == -1 && hasFollowed}}" hover-class="weui-cell_active">
+      <button class='followBtn' bindtap='unfollowBoya'>取消关注</button>
+    </view>
+</view>
+
+<van-search placeholder="搜索活动（id/名称）" shape="round" bind:search="onSearch" bind:change="onChange" bind:clear="onClear" bind:cancel="onClear"/>
+
+<!--信息、管理员、活动-->
+<view class='folder'>
+
+  <block wx:if="{{isRealOrg}}">
+  <view class='folder_item'>
+    <view class='title' data-index='0' catchtap='panel'>
+      <view class='title_arrow'>
+        <!-- <image src="/icon/{{showIndex[0]? 'up':'down'}}.png"></image> -->
+        <van-icon name="{{showIndex[0]? 'arrow-down':'arrow'}}" />
+      </view>
+      <view class='title_1'>信息</view>
+    </view>
+    <block wx:if="{{showIndex[0]}}">
+      <view class='detail'><span class="_infor_head">组织id：</span>{{orgId}}</view>
+      <view class='detail'><span class="_infor_head">所属版块：</span>{{orgInfo.belong_forum.name}}</view>
+      <view class='detail'><span class="_infor_head">创建时间：</span>{{orgInfo.create_time}}</view>
+      <view class='detail'><span class="_infor_head">负责人：</span>{{orgInfo.owner.name}}</view>
+      <view class='detail detail-last'><span class="_infor_head">介绍：</span>{{orgInfo.description ? orgInfo.description : "暂无"}}</view>
+
+        <button class='editBtn' bindtap='bindQRCodeButton' style="width:30%; margin-left: 50rpx;">{{showQRCode ? '隐藏二维码' :'显示二维码'}}</button>
+        
+        <view wx:if="{{showQRCode && qrcode != ''}}">
+            <image src="{{qrcode}}" class="qrcode"/>
+        </view>
+
+    </block>
+    
+    
+    <button class='editBtn' bindtap='editOrgInfo' wx:if="{{isManager && showIndex[0]}}" hover-class="weui-cell_active">编辑</button>
+  </view>
+  <view class='divLine'></view>
+  </block>
+
+  <block wx:if="{{isRealOrg}}">
+  <view class='folder_item mem-wrap'>
+    <view class='title' data-index='1' catchtap='panel'>
+      <view class='title_arrow'>
+        <!-- <image src="/icon/{{showIndex[1]? 'up':'down'}}.png"></image> -->
+        <van-icon name="{{showIndex[1]? 'arrow-down':'arrow'}}" />
+      </view>
+      <view class='title_1'>管理员</view>
+    </view>
+    <view class='mem-list' wx:if="{{showIndex[1]}}">
+        <view class="mem-item" wx:for="{{memList}}">
+          <view data-userid="{{item.person.id}}" bindtap="goUser"> 
+            <image class="mem-avatar" src="{{item.person.avatar}}"></image>
+            <!-- <text class="mem-name">{{item.person.id == orgInfo.owner.id ? (item.person.name.length < 6 ? item.person.name+"(负责人)" : ut.sub(item.person.name,5)+"(负责人)") : item.person.name}}</text> -->
+            <text class="mem-name">{{item.person.name}}</text>
+          </view>
+        </view>
+    </view>
+    <button class='editBtn' bindtap='editMemList' wx:if="{{isOwner && showIndex[1]}}" hover-class="weui-cell_active">编辑</button>
+  </view>
+  <view class='divLine'></view>
+  </block>
+
+  <view class='folder_item'>
+    <view class='title' data-index='2' catchtap='panel'>
+      <view class='title_arrow'>
+        <!-- <image src="/icon/{{showIndex[2]? 'up':'down'}}.png"></image> -->
+        <van-icon name="{{showIndex[2]? 'arrow-down':'arrow'}}" />
+      </view>
+      <view class='title_1'>未开始活动</view>
+    </view>
+    <view class='actList'  wx:if="{{showIndex[2]}}">
+      <i-cell-group i-class="act-wrap">
+        <button class='editBtn' bindtap='goNewAct' wx:if="{{isManager && orgId != -1}}" hover-class="weui-cell_active">新建</button>
+        <block wx:for="{{unstartActList}}" wx:key="id">
+            <i-cell title="{{item.name}}" label="{{item.description == '无' ? '' : item.description}}" is-link bindtap="goAct" 
+                data-actid="{{item.id}}" data-actname="{{item.name}}">
+            </i-cell> 
+        </block>
+      </i-cell-group>
+    </view>
+    <view class='divLine'></view>
+  </view>
+
+  <view class='folder_item'>
+    <view class='title' data-index='3' catchtap='panel'>
+      <view class='title_arrow'>
+        <!-- <image src="/icon/{{showIndex[3]? 'up':'down'}}.png"></image> -->
+        <van-icon name="{{showIndex[3]? 'arrow-down':'arrow'}}" />
+      </view>
+      <view class='title_1'>进行中活动</view>
+    </view>
+    <view class='actList'  wx:if="{{showIndex[3]}}">
+      <i-cell-group i-class="act-wrap">
+        <block wx:for="{{curActList}}" wx:key="id">
+            <i-cell title="{{item.name}}" label="{{item.description == '无' ? '' : item.description}}" is-link bindtap="goAct" 
+                data-actid="{{item.id}}" data-actname="{{item.name}}">
+            </i-cell> 
+        </block>
+      </i-cell-group>
+    </view>
+    <view class='divLine'></view>
+  </view>
+
+  <view class='folder_item'>
+    <view class='title' data-index='4' catchtap='panel'>
+      <view class='title_arrow'>
+        <!-- <image src="/icon/{{showIndex[4]? 'up':'down'}}.png"></image> -->
+        <van-icon name="{{showIndex[4]? 'arrow-down':'arrow'}}" />
+      </view>
+      <view class='title_1'>已结束活动</view>
+    </view>
+    <view class='actList'  wx:if="{{showIndex[4]}}">
+      <i-cell-group i-class="act-wrap">
+        <block wx:for="{{endActList}}" wx:key="id">
+            <i-cell title="{{item.name}}" label="{{item.description == '无' ? '' : item.description}}" is-link bindtap="goAct" 
+                data-actid="{{item.id}}" data-actname="{{item.name}}">
+            </i-cell> 
+        </block>
+      </i-cell-group>
+    </view>
+  </view>
+  <view class='divLine'></view>
+</view>

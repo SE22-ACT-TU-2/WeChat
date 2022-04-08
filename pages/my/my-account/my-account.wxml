@@ -1,0 +1,86 @@
+<!--pages/my/my-account/my-account.wxml-->
+
+
+<van-cell-group>
+    <view wx:if="{{verifiedEmail != ''}}">
+      <van-cell class="valueleft" title="我的用户id" value=" {{userId}}" />
+      <van-cell class="valueleft" title="认证邮箱" value="{{verifiedEmail}}" border="{{ false }}"/>
+    </view>
+</van-cell-group>
+
+
+<view class="verify-email relative" wx:if="{{verifiedEmail == ''}}">
+  <van-field
+      center
+      clearable
+      placeholder="请输入北航邮箱地址"
+      bindinput="inputEmailHandler"
+      border="{{ true }}"
+      style="color:black"
+      maxlength="30"
+    >
+  </van-field>
+  <text class="email-pattern">@buaa.edu.cn</text>
+  
+  <view wx:if="{{second==60}}">
+    <van-button class="my-button" slot="button" size="small" type="primary" custom-class="button" bindtap="submitVerifyEmail">发送验证码</van-button>
+  </view>
+  <view wx:else>
+    <van-button class="my-button" slot="button" size="small" type="primary" custom-class="button" bindtap="warnWait">重新发送({{second}})</van-button>
+  </view> 
+  
+  <!--label="验证码"-->
+  <van-field
+      center
+      clearable
+      placeholder="请输入邮箱验证码"
+      bindinput="inputVerifyCodeHandler"
+      border="{{ true }}"
+      style="color:black"
+      maxlength="6"
+    >
+  </van-field>
+  <van-button class="my-button" slot="button" size="small" type="primary" custom-class="button" bindtap="submitCertificate">提交验证</van-button>
+</view>
+
+
+<view wx:if="{{verifiedEmail != ''}}">
+  <van-field
+        center
+        clearable
+        label="昵称"
+        placeholder="{{nickName}}"
+        bindinput="inputNickNameHandler"
+        border="{{ true }}"
+        style="color:black"
+        maxlength="10"
+      >
+  </van-field>
+
+  <van-field
+        clearable
+        label="个人描述"
+        placeholder="{{motto}}"
+        bindinput="inputMottoHandler"
+        border="{{ false }}"
+        style="color:black"
+        maxlength="100"
+      >
+  </van-field>
+
+  <van-field
+        clearable
+        label="联系方式"
+        placeholder="{{contact}}"
+        bindinput="inputContactHandler"
+        border="{{ false }}"
+        style="color:black"
+        maxlength="30"
+      >
+  </van-field>
+
+
+  <van-button class="my-button" slot="button" size="small" type="primary" custom-class="button" bindtap="submitUserInfo">修改个人信息</van-button>
+
+  <text>\n\n提示：点击修改并允许授权，会同步微信头像至小程序</text>
+</view>

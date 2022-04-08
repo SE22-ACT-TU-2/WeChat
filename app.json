@@ -1,0 +1,109 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/follows/follows",
+    "pages/my/my-home/my-home",
+    "pages/schedule/schedule",
+    "pages/sections/sections-home/sections-home",
+    "pages/sections/act-list/act-list",
+    "pages/sections/act-list/mem-list/mem-list",
+    "pages/sections/act-detail/act-detail",
+    "pages/sections/org-edit/org-edit",
+    "pages/my/my-org/my-org",
+    "pages/my/my-act/my-act",
+    "pages/my/new-act/new-act",
+    "pages/my/new-org/new-org",
+    "pages/my/my-account/my-account",
+    "pages/sections/org-list/org-list",
+    "pages/my/feedback/feedback",
+    "pages/sections/search/search",
+    "pages/sections/act-detail/new-comment/new-comment",
+    "pages/sections/act-detail/participants/participants",
+    "pages/sections/user-info/user-info",
+    "pages/my/my-notif/my-notif"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "一苇以航",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "iconPath": "icon/home-outline.png",
+        "selectedIconPath": "icon/home.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "iconPath": "icon/planet-outline.png",
+        "selectedIconPath": "icon/planet.png",
+        "pagePath": "pages/sections/sections-home/sections-home",
+        "text": "分区"
+      },
+      {
+        "iconPath": "icon/heart-circle-outline.png",
+        "selectedIconPath": "icon/heart-circle.png",
+        "pagePath": "pages/follows/follows",
+        "text": "关注"
+      },
+      {
+        "iconPath": "icon/calendar-outline.png",
+        "selectedIconPath": "icon/calendar.png",
+        "pagePath": "pages/schedule/schedule",
+        "text": "日程"
+      },
+      {
+        "iconPath": "icon/person-outline.png",
+        "selectedIconPath": "icon/person.png",
+        "pagePath": "pages/my/my-home/my-home",
+        "text": "我的"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 10000,
+    "downloadFile": 10000
+  },
+  "debug": false,
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "themeLocation": "theme.json",
+  "usingComponents": {
+    "daddy-dialog": "/components/dialog/index",
+    "i-tabs": "lib/iview/dist/tabs/index",
+    "i-tab": "/lib/iview/dist/tab/index",
+    "i-card": "/lib/iview/dist/card/index",
+    "i-input": "/lib/iview/dist/input/index",
+    "i-panel": "/lib/iview/dist/panel/index",
+    "i-cell-group": "/lib/iview/dist/cell-group/index",
+    "i-cell": "/lib/iview/dist/cell/index",
+    "i-button": "/lib/iview/dist/button/index",
+    "i-icon": "/lib/iview/dist/icon/index",
+    "i-swipeout": "/lib/iview/dist/swipeout/index",
+    "van-search": "lib/vant-weapp/search/index",
+    "van-panel": "lib/vant-weapp/panel/index",
+    "van-cell": "lib/vant-weapp/cell/index",
+    "van-cell-group": "lib/vant-weapp/cell-group/index",
+    "van-field": "lib/vant-weapp/field/index",
+    "van-button": "lib/vant-weapp/button/index",
+    "van-rate": "lib/vant-weapp/rate/index",
+    "van-icon": "lib/vant-weapp/icon/index"
+  },
+  "plugins": {
+    "chooseLocation": {
+      "version": "1.0.6",
+      "provider": "wx76a9a06e5b4e693e"
+    }
+  },
+  "permission": {
+    "scope.userLocation": {
+    "desc": "你的位置信息将用于小程序定位"
+    }
+  }
+}

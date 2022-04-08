@@ -1,0 +1,38 @@
+<!--pages/my/my-org/my-org.wxml-->
+
+<!--我的组织-->
+<!-- <view class="my-org-header">
+    <text class="text">我的组织</text>
+</view> -->
+
+<!--创建组织按钮-->
+<view class="found-org">
+    <button class='btn' bindtap='goFoundOrg' hover-class="weui-cell_active">
+        <van-icon name='plus' size='60rpx'/>
+        <view>申请创建组织</view>
+    </button>
+</view>
+
+<van-search placeholder="搜索管理的组织（id/名称）" shape="round" bind:search="onSearch" bind:change="onChange" bind:clear="onClear" bind:cancel="onClear"/>
+
+<!--组织列表-->
+<!-- <view class="shadow">
+    <block wx:for="{{orgList}}" wx:key="id">
+			<view class="cell" hover-class="hover-grey" hover-stay-time="300" bindtap="goOrg" data-orgid="{{item.id}}" data-orgname="{{item.name}}">
+				<view class="content one-line">
+					<view class="title">{{item.name}}</view>
+					<view class="arrow" />
+				</view>
+			</view>
+    </block>
+</view> -->
+
+
+<i-cell-group i-class="org-wrap">
+    <block wx:for="{{orgList}}" wx:key="id">
+    <i-cell title="{{item.org.name}}" label="{{item.org.description}}" is-link bindtap="goOrg" data-orgid="{{item.org.id}}" data-orgname="{{item.org.name}}">
+        <image class="org-avatar" src="{{item.org.avatar ? item.org.avatar : '/icon/person.png'}}"  slot="icon"></image>
+    </i-cell> 
+    </block>
+</i-cell-group>
+

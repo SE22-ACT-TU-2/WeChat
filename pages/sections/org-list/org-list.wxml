@@ -1,0 +1,36 @@
+<!--pages/sections/org-list/org-list.wxml-->
+
+<!--版块名称-->
+<!-- <view class="forum-header">
+    <text class="text">{{forumName}}版块</text>
+</view> -->
+
+<!--创建组织按钮-->
+<view class="found-org" wx:if="{{show}}">
+    <button class='btn' bindtap='goFoundOrg' hover-class="weui-cell_active">
+        <van-icon name='plus' size='60rpx'/>
+        <view>申请创建组织</view>
+    </button>
+</view>
+
+<!--搜索框-->
+
+<!-- <view class="search-bar">
+    <view class="search" bindtap="goSearchOrg">
+        <image class="search-logo" src='/icon/search.png' mode="aspectFit"></image>
+        搜索组织
+    </view>
+</view> -->
+
+<van-search placeholder="搜索版块下的组织（id/名称）" shape="round" bind:search="onSearch" bind:change="onChange" bind:clear="onClear" bind:cancel="onClear"/>
+
+<i-cell-group i-class="org-wrap">
+    <block wx:for="{{forumInfo}}" wx:key="id">
+        <i-cell title="{{item.name}}" label="{{item.description}}" is-link bindtap="goOrg" 
+        data-orgid="{{item.id}}" data-orgname="{{item.name}}">
+            <image class="org-avatar" src="{{item.avatar ? item.avatar : '/icon/person.png'}}"  slot="icon"></image>
+        </i-cell> 
+    </block>
+</i-cell-group>
+
+

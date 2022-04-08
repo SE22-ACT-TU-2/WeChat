@@ -1,0 +1,24 @@
+<!--pages/sections/act-detail/new-comment/new-comment.wxml-->
+
+
+<view class="weui-cells weui-cells_form">
+  <view class="weui-cell">
+      <view class="weui-cell__bd">
+        <textarea class="weui-textarea" value="{{comment}}" bindinput="bindTextAreaInput"  rows="3"
+          placeholder="请输入评论" placeholder-class="weui-input__placeholder" maxlength="{{200}}" />
+          <!-- <view class="weui-textarea-counter"><span>0</span>/200</view> -->
+      </view>
+  </view>
+</view>
+
+<view class="rate-wrap" wx:if="{{mustRate}}">
+  <view class="txt">评分</view>
+  <van-rate custom-class="rate" model:value="{{ rate}}" bind:change="onChange" size="{{ 25 }}" allow-half void-icon="star"/>
+</view>
+
+
+
+<a class="weui-btn weui-btn_primary" bindtap="createComment">提交</a>
+
+
+<view wx:if="{{!mustRate}}">\n提示：未开始的活动只能评论\n不能进行评分</view>

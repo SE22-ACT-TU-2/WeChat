@@ -1,0 +1,128 @@
+<!--pages/my/new-act/new-act.wxml-->
+
+
+    
+
+<view wx:if="{{show}}">
+<i-panel title="活动基本信息">
+    <!-- <view class="weui-cell weui-cell_active weui-cell_select weui-cell_select-after">
+        <view class="weui-cell__hd">
+            <label class="weui-label" style="width: 3em">版块</label>
+        </view>
+        <view class="weui-cell__bd">
+            <picker bindchange="bindPicker_1_Change" range="{{forum_array}}">
+                <view class="weui-select">{{forum_array[index1].name}}</view>
+            </picker>
+        </view>
+    </view> -->
+
+    <!---->
+    <view wx:if="{{actId == -1}}" class="weui-cell weui-cell_active weui-cell_select weui-cell_select-after">
+        <view class="weui-cell__hd">
+            <label class="weui-label" style="width: 3em">组织</label>
+        </view>
+        <view class="weui-cell__bd">
+            <picker bindchange="bindPicker_2_Change" range="{{my_org}}" range-key="name" disabled="{{presetOrgId != -1}}">
+                <view class="weui-select">{{presetOrgId == -1 ? my_org[index2].name : presetOrgName}}</view>
+            </picker>
+        </view>
+    </view>
+
+    
+    <i-input bind:change="inputNameHandler" maxlength="20" title="活动名称" placeholder="{{actInfo.name ? actInfo.name : '请输入活动名称'}}" />
+    <i-input type="textarea"  bind:change="inputDescriptionHandler" maxlength="50" title="活动描述(可选)" placeholder="{{actInfo.description ? actInfo.description : '请输入活动描述'}}" />
+    <i-input bind:change="inputNumPeopleHandler" maxlength="3" type="number" title="最大人数" placeholder="{{actInfo.contain ? actInfo.contain : '请输入正整数'}}" />
+
+    <i-input bind:tap="toMap" disabled title="活动地点" value="{{hasLocation ? '已选择' : '点击选择'}}" />
+    <i-input bind:change="inputLocationTextHandler" maxlength="50" title="详细地址" placeholder="{{actInfo.location ? actInfo.location.name : '请输入详细地址'}}" />
+
+    <view class="org-pic">
+        <view class="text">图片</view>
+        <view class="picture" wx:if="{{actPicUrl && actPicUrl != ''}}">
+        <image src="{{actPicUrl}}" class="pictureSize" mode="widthFix" ></image>
+        </view>
+        <view class='uploadBtnWrap'>
+        <a class='weui-btn weui-btn_default weui-btn_mini' bindtap='uploadPic'>上传</a>
+        </view>
+        <view class='uploadBtnWrap' wx:if="{{actPicUrl && actPicUrl != ''}}">
+        <a class='weui-btn weui-btn_default weui-btn_mini' bindtap='removePic' style="margin-top:20rpx">删除</a>
+        </view>
+    </view>
+
+    <view class="weui-cell weui-cell_active weui-cell_select weui-cell_select-after">
+        <view class="weui-cell__hd">
+            <label class="weui-label" style="width: 3em">类别</label>
+        </view>
+        <view class="weui-cell__bd">
+            <picker bindchange="bindPicker_1_Change" range="{{categories}}" range-key="name">
+                <view class="weui-select">{{categories[index1].name}}</view>
+            </picker>
+        </view>
+    </view>
+    <view wx:if="{{createNewCategory}}">
+        <i-input bind:change="inputNewCategoryHandler" maxlength="10" title="新类别" placeholder="{{'请输入新建类别名称'}}" />
+    </view>
+
+    <view class="weui-cell weui-cell_active">
+        <view class="weui-cell__hd">
+            <view class="weui-label">起始日期</view>
+        </view>
+        <view class="weui-cell__bd">
+            <picker mode="date" value="{{start_date}}" bindchange="bindStartDateChange">
+                <view class="weui-input">{{start_date}}</view>
+            </picker>
+        </view>
+    </view>
+    <view class="weui-cell weui-cell_active">
+        <view class="weui-cell__hd">
+            <view class="weui-label">起始时间</view>
+        </view>
+        <view class="weui-cell__bd">
+            <picker mode="time" value="{{start_time}}" bindchange="bindStartTimeChange">
+                <view class="weui-input">{{start_time}}</view>
+            </picker>
+        </view>
+    </view>
+
+    <view class="weui-cell weui-cell_active">
+        <view class="weui-cell__hd">
+            <view class="weui-label">结束日期</view>
+        </view>
+        <view class="weui-cell__bd">
+            <picker mode="date" value="{{end_date}}" bindchange="bindEndDateChange">
+                <view class="weui-input">{{end_date}}</view>
+            </picker>
+        </view>
+    </view>
+    <view class="weui-cell weui-cell_active">
+        <view class="weui-cell__hd">
+            <view class="weui-label">结束时间</view>
+        </view>
+        <view class="weui-cell__bd">
+            <picker mode="time" value="{{end_time}}" bindchange="bindEndTimeChange">
+                <view class="weui-input">{{end_time}}</view>
+            </picker>
+        </view>
+    </view>
+
+
+
+    <!-- <view wx:if="{{actId == -1}}" class="weui-cell weui-cell_active weui-cell_select weui-cell_select-after">
+        <view class="weui-cell__hd">
+            <label class="weui-label" style="width: 3em">加入需要审核</label>
+        </view>
+        <view class="weui-cell__bd">
+            <picker bindchange="bindPicker_3_Change" range="{{flag}}">
+                <view class="weui-select check-right"> {{flag[index3]}}</view>
+            </picker>
+        </view>
+    </view> -->
+
+</i-panel>
+
+<a class="weui-btn weui-btn_primary" bindtap="submitActWrapper">提交</a>
+</view>
+
+<view wx:else>
+<text>不支持此功能</text>
+</view>

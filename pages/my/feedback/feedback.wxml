@@ -1,0 +1,41 @@
+<!--pages/my/feedback/feedback.wxml-->
+
+<!--pages/my/new-org/new-org.wxml-->
+
+
+<!-- <van-field
+      center
+      clearable
+      label="组织名称"
+      placeholder="请输入组织名称"
+      bindinput="inputNameHandler"
+      border="{{ true }}"
+    >
+</van-field>
+<van-field
+      center
+      clearable
+      label="申请原因"
+      placeholder="请输入申请原因"
+      bindinput="inputDescriptionHandler"
+      border="{{ true }}"
+    >
+</van-field>
+<van-button class="my-button" slot="button" size="small" type="primary" custom-class="button" bindtap="submitOrg">提交申请</van-button> -->
+
+
+
+<i-panel title="提交反馈">
+
+    <i-input type="textarea" value="{{content}}" bind:change="contentHandler" title="反馈内容" placeholder="写写你的建议/问题" maxlength="50"/>
+    <i-input value="{{contact}}" bind:change="contactHandler" title="联系方式(可选)" placeholder="留下qq/微信" maxlength="20"/>
+
+</i-panel>
+<a class="weui-btn weui-btn_primary" bindtap="submitFB">提交</a>
+
+<view style="background : white; margin-top : 100rpx" >
+<view class="bottom">
+<text>关于我们：\n一苇以航开发团队\n乐洋 史鑫杰 王肇凯 开聚实 王佳瑞 李永毅\n\n</text>
+<text>版本：{{version}}</text>
+</view>
+</view>

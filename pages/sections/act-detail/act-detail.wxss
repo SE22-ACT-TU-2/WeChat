@@ -1,0 +1,166 @@
+/* pages/sections/act-detail/act-detail.wxss */
+
+/* 活动名称 */
+.act-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100rpx;
+  padding: 0 30rpx;
+}
+
+.act-header .joinBtn{
+  width: 100rpx;
+  height: 60rpx;
+  background-color: rgba(19, 173, 245, 0.548);
+  color: white;
+  border-radius: 49rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  writing-mode: vertical-lr;
+  margin-right: 0%;
+}
+
+.act-header .unJoinBtn{
+  width: 200rpx;
+  height: 60rpx;
+  background-color: rgba(19, 173, 245, 0.548);
+  color: white;
+  border-radius: 49rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  writing-mode: vertical-lr;
+  margin-right: 0%;
+}
+
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 90rpx;
+  padding: 0 30rpx;
+}
+
+.comment-header .txt {
+  color: #333;
+  font-size: 32rpx;
+  font-weight: 500;
+}
+
+.comment-header .right {
+  display: flex;
+  align-items: center;
+}
+
+.comment-header .right-txt {
+  color: #666;
+  font-size: 25rpx;
+  margin-right: 10rpx;
+}
+
+.msg-item {
+  display: block;
+  margin-top: 20rpx;
+  background: #fff;
+}
+
+.msg-item .title {
+  margin-bottom: 15rpx;
+}
+
+.card-demo image {
+  /* border-radius: 50%; */
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.msg-item ._infor_head {
+  color: rgb(0, 174, 255);
+}
+
+.msg-item .count {
+  display: block;
+  font-size: 35rpx;
+  font-weight: 500;
+}
+
+.msg-item .organizer {
+  display: block;
+  font-size: 35rpx;
+  font-weight: 500;
+  margin-top: 10rpx;
+}
+
+.msg-item .act_time {
+  display: block;
+  font-size: 35rpx;
+  font-weight: 500;
+  margin-top: 10rpx;
+}
+
+.msg-item .place {
+  display: block;
+  font-size: 35rpx;
+  font-weight: 500;
+  margin-top: 10rpx;
+}
+
+.msg-item .body {
+  font-size: 35rpx;
+  margin-top: 10rpx;
+  font-size: 26rpx;
+}
+
+.msg-item .bottom-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.msg-item .bottom-right .txt {
+  color: #666;
+  font-size: 25rpx;
+  margin-right: 10rpx;
+}
+
+.msg-item .bottom-right2 .txt {
+  color: #666;
+  font-size: 25rpx;
+  margin-right: 50rpx;
+}
+
+.msg-item .bottom-right2 .arrow {
+  width: 20rpx;
+  height: 30rpx;
+} 
+
+.msg-item .bottom-right .arrow {
+  width: 20rpx;
+  height: 30rpx;
+} 
+
+.owner {
+  height: 5rpx;
+}
+
+.middleBtn {
+  width: 100rpx;
+  height: 60rpx;
+  background-color: rgba(19, 173, 245, 0.548);
+  color: white;
+  border-radius: 49rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  writing-mode: vertical-lr;
+  margin-right: 0%;
+}
