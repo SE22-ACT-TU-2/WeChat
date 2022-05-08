@@ -1,0 +1,53 @@
+<view class="container">
+  <view class="userinfo-wrap">
+    <image style="width: 750rpx; height: 433rpx; box-sizing: border-box"  class="background" src='/icon/beihang_background.png'/>
+
+    
+    <view class="userinfo" wx:if="{{canIUseOpenData}}" >
+      <!-- <view class="userinfo-avatar" bind:tap="bindViewTap"> -->
+        <image src="{{avatar}}" class="userinfo-avatar"></image>
+        <!-- <open-data type="userAvatarUrl"></open-data> -->
+      <!-- </view> -->
+        <text class="userinfo-nickname">{{nickName}}</text>
+        <text class="userinfo-motto" wx:if="{{motto && motto != ''}}">{{motto}}</text>
+    </view>
+    <view wx:elif="{{!hasUserInfo}}">
+      <button wx:if="{{canIUseGetUserProfile}}" bind:tap="getUserProfile"> 获取头像昵称 </button>
+      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+      <view wx:else>  </view>
+    </view>
+    <view wx:else class="userinfo">
+      <image bind:tap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{nickName}}</text>
+      <text class="userinfo-nickname">{{motto}}</text>
+    </view>
+  </view>
+
+  <van-cell title="您当前身份信息认证为:" value="{{identity}}" />
+
+<van-cell-group>
+  <van-field
+    value="{{ content1 }}"
+    type = "textarea"
+    placeholder="学号"
+    border="{{ true }}"
+    clearable = "{{true}}"
+    bind:change="contactHandler1"
+  />
+</van-cell-group>
+<van-cell-group>
+  <van-field
+    value="{{ content2 }}"
+    type = "textarea"
+    placeholder="姓名"
+    border="{{ true }}"
+    clearable = "{{true}}"
+    bind:change="contactHandler2"
+  />
+</van-cell-group>
+<view class = "btn"> 
+<button class = "upload" bindtap="getPhoto" type= "primary" > 上传图片</button>
+<button class= "commit" bindtap="upload" type="primary" >申请认证</button>
+</view>
+
+</view>

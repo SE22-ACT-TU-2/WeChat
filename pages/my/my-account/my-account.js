@@ -262,6 +262,12 @@ Page({
     promise.then((setTimer) => {
       clearInterval(setTimer)
     })
+  },
+
+  goidentity() {
+    wx.navigateTo({
+      url: `../my-identity/my-identity`,
+    })
   }
 
 })

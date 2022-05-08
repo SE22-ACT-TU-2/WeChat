@@ -1,0 +1,149 @@
+<view>
+    <picker bindchange="identity_select"  value="{{index3}}" range='{{arrayid}}' 
+		range-key="name" >
+    <van-cell title="选择预约者身份" value="{{identity}}" />
+    </picker>
+    <view wx:if= "{{same}}">
+      <van-collapse value="{{ activeNames }}" bind:change="onChange">
+        <view wx:for = "{{list}}" wx:key="index">
+          <van-collapse-item title="预约{{index + 1}}" name="{{index}}">
+        <picker bindchange="area_select"  value="{{index4}}" range='{{arrayarea1}}' 
+            range-key="name"  data-current="{{item.id}}">
+            <van-cell title="选择预约区域" value="{{item.area1}}" />
+        </picker>
+        <view wx:if = "{{showPrice}}">
+            <van-cell title='注：当前场地价格为{{price}}元'/>
+        </view>
+        <picker bindchange="site_select"  value="{{index5}}" range='{{item.arrayarea2}}' 
+            range-key="name"  data-current="{{item.id}}">
+            <van-cell title="选择预约场地" value="{{item.area2}}" />
+        </picker>
+        <picker bindchange="date_select"  value="{{index6}}" range='{{arraydate}}' 
+            range-key="days"  data-current="{{item.id}}">
+            <van-cell title="选择预约时间" value="{{item.date}}" />
+        </picker>
+        <picker bindchange="begintime_select"  value="{{index7}}" range='{{arraytime}}' 
+            range-key="hour"  data-current="{{item.id}}">
+            <van-cell title="选择预约开始时间" value="{{item.begin_time}}" />
+        </picker>
+        <picker bindchange="endtime_select"  value="{{index8}}" range='{{arraytime}}' 
+            range-key="hour"  data-current="{{item.id}}">
+            <van-cell title="选择预约结束时间" value="{{item.end_time}}" />
+        </picker>
+          </van-collapse-item>
+        </view>
+      </van-collapse>
+    </view>
+    <view wx:else> 
+        <picker bindchange="area_select"  value="{{index4}}" range='{{arrayarea1}}' 
+            range-key="name"  data-current="{{list[0].id}}">
+            <van-cell title="选择预约区域" value="{{list[0].area1}}" />
+        </picker>
+        <view wx:if = "{{showPrice}}">
+            <van-cell title='注：当前场地价格为{{price}}元'/>
+        </view>
+        <picker bindchange="site_select"  value="{{index5}}" range='{{list[0].arrayarea2}}' 
+            range-key="name"  data-current="{{list[0].id}}">
+            <van-cell title="选择预约场地" value="{{list[0].area2}}" />
+        </picker>
+        <picker bindchange="date_select"  value="{{index6}}" range='{{arraydate}}' 
+            range-key="days"  data-current="{{list[0].id}}">
+            <van-cell title="选择预约时间" value="{{list[0].date}}" />
+        </picker>
+        <picker bindchange="begintime_select"  value="{{index7}}" range='{{arraytime}}' 
+            range-key="hour"  data-current="{{list[0].id}}">
+            <van-cell title="选择预约开始时间" value="{{list[0].begin_time}}" />
+        </picker>
+        <picker bindchange="endtime_select"  value="{{index8}}" range='{{arraytime}}' 
+            range-key="hour"  data-current="{{list[0].id}}">
+            <van-cell title="选择预约结束时间" value="{{list[0].end_time}}" />
+        </picker>
+    </view>
+<view class="show">
+    <van-cell-group>
+  <van-field
+    value="{{ file }}"
+    type = "textarea"
+    placeholder="请输入预约理由"
+    border="{{ true }}"
+    clearable = "{{true}}"
+    autosize
+    bind:change="changeReason"
+  />
+</van-cell-group>
+</view>
+<view>
+    <button class="addbtn"  bindtap="addlist" style="width: 120px; position: relative; left: 2rpx; top: 37rpx">
+        添加表单
+    </button>
+    <button class="resetbtn" bindtap="resetlist" style="width: 120px; position: relative; left: -104rpx; top: 37rpx">
+        重置表单
+    </button>
+    <button class="btn" bindtap="post" style="width: 120px; position: relative; left: 4rpx; top: -37rpx">
+        提交
+    </button>
+</view>    
+</view>
+<picker bindchange="bindPickerChange1"  value="{{index1}}" range='{{array}}' 
+		range-key="name"  data-id='{{array[index1].id}}' data-name='{{array[index1].name}}'>
+    <van-cell title="选择查询区域" value="{{site}}" />
+</picker>
+<picker bindchange="bindPickerChange2"  value="{{index2}}" range='{{arraydate}}' 
+     range-key="days"
+    >
+    <van-cell title="选择查询时间" value="{{needdate}}" />
+</picker>
+<view>
+<button class="searchbtn"  bindtap="onTap">
+    查询
+</button>
+</view>
+<view wx:if = "{{click}}">
+<van-cell title='查询结果为:（"√"表示可预约）'/>
+    <view wx:for="{{result}}" wx:key="groud_id" wx:for-item = "outitem" wx:for-index = "index1">
+        <van-row custom-class = "result_ground">
+        <van-col span="24" >{{outitem.ground_name}}</van-col>
+        </van-row>
+
+        <van-row custom-class = "result">
+        <van-col span="3">时间</van-col>
+        <van-col span="3">8-9</van-col>
+        <van-col span="3">9-10</van-col>
+        <van-col span="3">10-11</van-col>
+        <van-col span="3">11-12</van-col>
+        <van-col span="3">12-13</van-col>
+        <van-col span="3">13-14</van-col>
+        <van-col span="3">14-15</van-col>
+        </van-row>
+        <van-row>
+        <van-col custom-class = "state" span="3"> 状态</van-col>
+        <view wx:for="{{outitem.period}}" wx:key="*this" wx:for-item = "initem" wx:for-index = "index2">
+        <view wx:if="{{index2<=6}}">
+        <van-col custom-class='{{initem==1?"no" : "yes"}}' span="3" >{{initem==1?"×": "√"}}</van-col>
+        </view>
+        </view> 
+        </van-row> <!--渲染前一半空位数据-->
+        <van-row custom-class = "result">
+        <van-col span="3">时间</van-col>
+        <van-col span="3">15-16</van-col>
+        <van-col span="3">16-17</van-col>
+        <van-col span="3">17-18</van-col>
+        <van-col span="3">18-19</van-col>
+        <van-col span="3">19-20</van-col>
+        <van-col span="3">20-21</van-col>
+        <van-col span="3">21-22</van-col>
+        </van-row>
+        <van-row>
+        <van-col custom-class = "state" span="3"> 状态</van-col>
+        <view wx:for="{{outitem.period}}" wx:key="*this" wx:for-item = "initem" wx:for-index = "index2">
+        <view wx:if="{{index2>=7}}">
+        <van-col custom-class='{{initem==1?"no" : "yes"}}' span="3" >{{initem==1?"×": "√"}}</van-col>
+        </view>
+        </view> 
+        </van-row> <!--渲染后一半空位数据-->
+
+        <view>
+        </view>
+
+</view>
+</view>

@@ -1,0 +1,100 @@
+/* pages/my/my-org/my-org.wxss */
+
+/* .forum-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 90rpx;
+  padding: 0 30rpx;
+} */
+.userinfo-wrap {
+  position: relative;
+  height: 40%;
+  /* background-image: url('/icon/beihang_background.png'); */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.btn{
+  
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  padding-top: 20rpx;
+  left: 20rpx;
+  right: 20rpx;
+}
+
+.btnImg {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+/* .shadow {
+  transition: ease-out 200ms;
+  box-shadow: 0 0 18rpx rgb(236, 236, 236);
+}
+
+.arrow {
+  width: 20rpx;
+  height: 20rpx;
+  border-top: 4rpx solid #999;
+  border-right: 4rpx solid #999;
+  transform: rotate(45deg);
+  margin: 0 12rpx 0 auto;
+}
+
+.one-line {
+  align-items: center;
+}
+
+.title {
+  font-size: 34rpx;
+}
+
+.card {
+  padding: 0;
+}
+
+.order {
+  font-weight: 600;
+}
+
+.cell {
+  padding: 24rpx;
+  height: 80rpx;
+  align-items: center;
+  display: flex;
+  background : white;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.auth-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-content text {
+  margin-bottom: 30rpx;
+} 
+*/
+.org-wrap {
+   margin-top: 50rpx 
+}
+
+.org-wrap .org-avatar {
+  border-radius: 50%;
+  /* width: 40rpx;
+  height: 40rpx; */
+  width: 80rpx;
+  height: 80rpx;
+}
+.upload{
+  float: left;
+}
+.commit{
+  float: right;
+}
+
+
+

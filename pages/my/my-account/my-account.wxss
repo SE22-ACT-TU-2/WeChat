@@ -24,3 +24,10 @@ van-button {
   color: black
 }
 
+.my-button1{
+  float:left;
+}
+.my-button2{
+  float:right;
+}
+

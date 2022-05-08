@@ -1,0 +1,44 @@
+<view class="container">
+  <view class="userinfo-wrap">
+    <image class="background" src='/icon/beihang_background.png'/>
+
+    
+    <view class="userinfo" wx:if="{{canIUseOpenData}}" >
+      <!-- <view class="userinfo-avatar" bind:tap="bindViewTap"> -->
+        <image src="{{avatar}}" class="userinfo-avatar"></image>
+        <!-- <open-data type="userAvatarUrl"></open-data> -->
+      <!-- </view> -->
+        <text class="userinfo-nickname">{{nickName}}</text>
+        <text class="userinfo-motto" wx:if="{{motto && motto != ''}}">{{motto}}</text>
+    </view>
+    <view wx:elif="{{!hasUserInfo}}">
+      <button wx:if="{{canIUseGetUserProfile}}" bind:tap="getUserProfile"> 获取头像昵称 </button>
+      <button wx:elif="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+      <view wx:else>  </view>
+    </view>
+    <view wx:else class="userinfo">
+      <image bind:tap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{nickName}}</text>
+      <text class="userinfo-nickname">{{motto}}</text>
+    </view>
+  </view>
+
+  <i-panel i-class = "i_title" title="您的账户余额为：" hide-border = "{{true}}">
+    <view class = "user_money" style="padding: 20px;"> {{money}}</view>
+ </i-panel>
+
+ <van-cell-group>
+  <van-field
+    value="{{ content }}"
+    type = "textarea"
+    placeholder="充值金额"
+    border="{{ true }}"
+    clearable = "{{true}}"
+    bind:change="contactHandler"
+  />
+</van-cell-group>
+  <a class="weui-btn weui-btn_primary" bindtap="addMoney"
+  >充值</a>
+ 
+
+</view>

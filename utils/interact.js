@@ -16,6 +16,7 @@ function get_errmsg(data) {
 }
 
 function send_receivers_to_websocket(result) {
+  console.log("send_receivers_to_websocket")
   // 如果返回结果包含"__receivers__"字段, 发送ws请求
     if (result.data.__receivers__) {
       
@@ -1285,11 +1286,151 @@ module.exports.getRecommend = function () {
 module.exports.show = function() {
   return new Promise((resolve, reject) => {
     wx.request({
-      url: 'https://www.reedsailing.xyz/api/show/',
+      // url: 'https://www.reedsailing.xyz/api/show/',
+      url: 'http://114.116.194.3:8000/api/show/',
       method: 'GET',
       success : result => {
         resolve(result)
       }
+    })
+  })
+}
+
+//new
+module.exports.getMoney = function() {
+  if (!app) { 
+    app = getApp()
+  }
+  return new Promise((resolve, reject) => {
+    get_request(`users/wallet/${app.loginData.userId}/`, 
+      {
+        func: module.exports.getMoney,
+        funcName: 'getMoney',
+        reject: reject,
+        resolve: resolve
+    })
+  }) 
+}
+
+module.exports.needsite = function(area) {
+  return new Promise((resolve, reject) => {
+    get_request(`sites/${area}/`, 
+      {
+        func: module.exports.needsite,
+        funcName: 'needsite',
+        reject: reject,
+        resolve: resolve
+    })
+  })
+}
+
+module.exports.addMoney = function(money) {
+  return new Promise((resolve, reject) => {
+    post_request(`users/wallet/`, 
+      {
+        user_id : app.loginData.userId,
+        money : money
+      },
+      {
+        func: module.exports.addMoney,
+        funcName: 'addMoney',
+        reject: reject,
+        resolve: resolve
+    })
+  }) 
+}
+
+module.exports.cancelSite = function(id) {
+  return new Promise((resolve, reject) => {
+    get_request(`users/cancel_booking/${id}`, 
+      {
+        func: module.exports.cancelSite,
+        funcName: 'cancelSite',
+        reject: reject,
+        resolve: resolve
+    })
+  }) 
+}
+
+module.exports.changeSite = function(options) {//
+  return new Promise((resolve, reject) => {
+    post_request(`users/booked_ground/`,options,
+      {
+        func: module.exports.changeSite,
+        funcName: 'changeSite',
+        reject: reject,
+        resolve: resolve
+    })
+  }) 
+}
+
+module.exports.getAllStatusJoinSites = function () {
+  return new Promise((resolve, reject) => {
+    get_request(`users/booked_ground/${getApp().loginData.userId}/`, 
+      {
+        func: module.exports.getAllStatusJoinSites,
+        funcName: 'getAllStatusJoinSites',
+        reject: reject,
+        resolve: resolve
+    })
+  })
+}
+
+module.exports.booksite = function (options) {
+  return new Promise((resolve, reject) => {
+    post_request(`sites/`,options,
+      {
+        func: module.exports.bookSite,
+        funcName: 'bookSite',
+        reject: reject,
+        resolve: resolve
+    })
+  })
+}
+
+module.exports.searchSite = function (date,area,ground_id) {
+  return new Promise((resolve, reject) => {
+    post_request(`sites/used`,
+      {
+        date : date,
+        area : area,
+        ground_id : ground_id
+      },
+      {
+        func: module.exports.searchSite,
+        funcName: 'searchSite',
+        reject: reject,
+        resolve: resolve
+    })
+  })
+}
+
+module.exports.searchidentity = function () {
+  return new Promise((resolve, reject) => {
+    get_request(`users/verify/${app.loginData.userId}`,
+      {
+        func: module.exports.searchidentity,
+        funcName: 'searchidentity',
+        reject: reject,
+        resolve: resolve
+    })
+  })
+}
+
+module.exports.changeidentity = function (student_id,name,picture) {
+  return new Promise((resolve, reject) => {
+    post_request(`users/verify/`,
+      {
+        user_id : app.loginData.userId,
+        student_id : student_id,
+        name : name,
+        picture : picture
+      },
+      {
+        func: module.exports.changeidentity,
+        funcName: 'changeidentity',
+        reject: reject,
+        resolve: resolve
     })
   })
 }

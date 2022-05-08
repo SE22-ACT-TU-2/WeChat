@@ -60,12 +60,14 @@ App({
   ],
   socketOpen : false,
   firstShow : true,
-  server : 'https://www.reedsailing.xyz/api/',
-  ws_werver: 'wss://www.reedsailing.xyz/ws/',
+  //server : 'https://www.reedsailing.xyz/api/',
+  //ws_werver: 'wss://www.reedsailing.xyz/ws/',
   // server : 'http://127.0.0.1:8000/api/',
   // ws_werver: 'ws://127.0.0.1:8000/ws/',
   // ws_werver: 'wss://rs.test/ws/',
   // server : 'http://rs.test/',
+  server : 'http://114.116.194.3:8000/api/',
+  ws_werver: 'ws://114.116.194.3:8000/ws/',
   
 
   shareData : {

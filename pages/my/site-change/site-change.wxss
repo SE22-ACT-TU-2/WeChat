@@ -1,0 +1,49 @@
+.btn1{
+  background-color: #7ab7fc;
+  color: #ffffff;
+  width: 250rpx; 
+  height: 80rpx;
+  float:left;
+
+}
+.btn2{
+  background-color: #7ab7fc;
+  color: #ffffff;
+  width: 250rpx; 
+  height: 80rpx;
+  float:right;
+
+}
+.button{
+  padding-top:10px;
+  padding-bottom:10px;
+}
+.my_result{
+  border-color: #1989fa;
+  border: #1989fa;
+  color: #f7f2f2;
+  font-family: 10;
+  padding-bottom: 10px;
+}
+.test2{
+  background-color:  #1d79e2;
+  color: #ffffff;
+  text-align: center;
+}
+.yes{
+  border-color: #56697c;
+  text-align: center;
+  background-color: #7ab7fc;
+  color:#ffffff;
+}
+.no{
+  border-color: #56697c;
+  text-align: center;
+  background-color: #90b4dd;
+  color:#ffffff;
+}
+.result{
+  background-color:#aacdf5;
+  color:#ffffff;
+  text-align: center;
+}

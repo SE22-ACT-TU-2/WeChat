@@ -1,0 +1,104 @@
+<!-- ……总之就是很丑 -->
+<view>
+    <picker bindchange="begintime_select"  value="{{index7}}" range='{{arraytime}}' 
+		range-key="hour" >
+        <!--{{begin_time}}-->
+        <van-cell title="选择预约开始时间" value="{{begin_time}}" />
+    </picker>
+    <picker bindchange="endtime_select"  value="{{index8}}" range='{{arraytime}}' 
+		range-key="hour" >
+        <van-cell title="选择预约结束时间" value="{{end_time}}" />
+    </picker>
+    <picker bindchange="date_select"  value="{{index3}}" range='{{arraydate}}' 
+		range-key="days" >
+        <van-cell title="选择预约日期" value="{{date}}" />
+    </picker>
+    </view>
+<view class="show">
+    <van-cell-group>
+  <van-field
+    value="{{ file }}"
+    type = "textarea"
+    placeholder="输入预约理由"
+    border="{{ true }}"
+    clearable = "{{true}}"
+    autosize
+    bind:change="onChange"
+    style = "height:30px"
+  />
+</van-cell-group>
+</view>
+<view class = "button">
+<button class="btn1"  bindtap="search">
+        场地查询
+</button>
+<button class="btn2"  bindtap="book">
+    改期
+</button>
+</view>
+<view class="search">
+    
+  
+    <!--
+    <van-row gutter = "25">
+        <van-col span="1.6" >8</van-col>
+        <van-col span="1.6" >9</van-col>
+        <van-col span="1.6" >10</van-col>
+        <van-col span="1.6" >11</van-col>
+        <van-col span="1.6" >12</van-col>
+        <van-col span="1.6" >13</van-col>
+        <van-col span="1.6" >14</van-col>
+        <van-col span="1.6" >15</van-col>
+        <van-col span="1.6" >16</van-col>
+        <van-col span="1.6" >17</van-col>
+        <van-col span="1.6" >18</van-col>
+        <van-col span="1.6" >19</van-col>
+        <van-col span="1.6" >20</van-col>
+        <van-col span="1.6" >21</van-col>
+        <van-col span="1.6" >22</van-col>
+    </van-row>
+    <van-row gutter = "25">
+    <view wx:for="{{list}}" wx:key="*this" class='{{item==1?"yes" : "no"}}'>
+        <van-col span="1.6" >{{item==1?"√": "×"}}</van-col>
+    </view>
+    </van-row>-->
+    <view class = "my_result" wx:if="{{showResult}}"> 
+    <van-cell title='查询结果("√"表示可预约)'/>
+  <view>
+    <van-row custom-class = "test2">
+  <van-col  span="3" >时间</van-col>
+  <van-col  span="3">8-9</van-col>
+  <van-col  span="3">9-10</van-col>
+  <van-col  span="3">10-11</van-col>
+  <van-col  span="3">11-12</van-col>
+  <van-col  span="3">12-13</van-col>
+  <van-col  span="3">13-14</van-col>
+  <van-col  span="3">14-15</van-col>
+    </van-row>
+    <van-row custom-class = "test2">
+  <van-col custom-class = "result" span="3">结果</van-col>
+   <view wx:for="{{list1}}"  >
+        <van-col span="3" custom-class='{{item==1?"no" : "yes"}}' >{{item==1?"×": "√"}}</van-col>
+    </view>
+    </van-row>
+    <van-row custom-class = "test2">
+    <van-col span="3">时间</van-col>
+  <van-col  span="3">15-16</van-col>
+  <van-col  span="3">16-17</van-col>
+  <van-col  span="3">17-18</van-col>
+  <van-col  span="3">18-19</van-col>
+  <van-col  span="3">19-20</van-col>
+  <van-col  span="3">20-21</van-col>
+  <van-col  span="3">21-22</van-col>
+    </van-row>
+    <van-row>
+  <van-col custom-class = "result" span="3">结果</van-col>
+  <view wx:for="{{list2}}"  >
+        <van-col span="3" custom-class='{{item==1?"no" : "yes"}}'>{{item==0?"√": "×"}}</van-col>
+    </view>
+    </van-row>
+
+  </view>
+</view>
+</view>
+

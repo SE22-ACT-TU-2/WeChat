@@ -1,8 +1,12 @@
 {
   "pages": [
-    "pages/index/index",
-    "pages/follows/follows",
     "pages/my/my-home/my-home",
+    "pages/site/site",
+    "pages/my/my-site/my-site",
+    "pages/my/site-change/site-change",
+    "pages/my/my-identity/my-identity",
+    "pages/follows/follows",
+    
     "pages/schedule/schedule",
     "pages/sections/sections-home/sections-home",
     "pages/sections/act-list/act-list",
@@ -11,6 +15,8 @@
     "pages/sections/org-edit/org-edit",
     "pages/my/my-org/my-org",
     "pages/my/my-act/my-act",
+    
+    "pages/my/my-money/my-money",
     "pages/my/new-act/new-act",
     "pages/my/new-org/new-org",
     "pages/my/my-account/my-account",
@@ -37,8 +43,8 @@
       {
         "iconPath": "icon/home-outline.png",
         "selectedIconPath": "icon/home.png",
-        "pagePath": "pages/index/index",
-        "text": "首页"
+        "pagePath": "pages/site/site",
+        "text": "场地"
       },
       {
         "iconPath": "icon/planet-outline.png",
@@ -93,7 +99,12 @@
     "van-field": "lib/vant-weapp/field/index",
     "van-button": "lib/vant-weapp/button/index",
     "van-rate": "lib/vant-weapp/rate/index",
-    "van-icon": "lib/vant-weapp/icon/index"
+    "van-icon": "lib/vant-weapp/icon/index",
+    "van-row": "lib/vant-weapp/row/index",
+    "van-col": "lib/vant-weapp/col/index",
+    "van-picker": "lib/vant-weapp/picker/index",
+    "van-collapse": "lib/vant-weapp/collapse/index",
+    "van-collapse-item": "lib/vant-weapp/collapse-item/index"
   },
   "plugins": {
     "chooseLocation": {

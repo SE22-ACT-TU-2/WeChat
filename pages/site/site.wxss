@@ -1,0 +1,50 @@
+/* pages/site.wxss */
+.addbtn
+{
+  background-color: #7ab7fc;
+  width:150px;
+  float: left;
+  color:#ffffff;
+}
+.resetbtn
+{
+  background-color: #7ab7fc;
+  width:150px;
+  color:#ffffff;
+}
+.btn{
+  background-color: #7ab7fc;
+  width:150px;
+  color:#ffffff;
+  float:right;
+}
+.searchbtn{
+  background-color: #7ab7fc;
+  width:150px;
+  color:#ffffff;
+}
+.result{
+  background-color:#7ab7fc;
+  color:#ffffff;
+  text-align: center;
+}
+.result_ground{
+  background-color:#0a4b96;
+  color:#ffffff;
+  text-align: center;
+}
+.state{
+  background-color:#aacdf5;
+  color:#ffffff;
+  text-align: center;
+}
+.yes{
+  background-color:#1d79e2;
+  color:#ffffff;
+  text-align: center;
+}
+.no{
+  background-color:#90b4dd;
+  color:#ffffff;
+  text-align: center;
+}

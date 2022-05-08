@@ -23,6 +23,7 @@
 </swiper> -->
 
 <i-tabs current="{{ current }}" color="#f759ab" bindchange="handleChange">
+    
     <i-tab key="tab1" title="活动日历"></i-tab>
     <i-tab key="tab2" title="活动列表"></i-tab>
 </i-tabs>

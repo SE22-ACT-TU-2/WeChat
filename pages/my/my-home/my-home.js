@@ -25,6 +25,14 @@ Page({
         url:'../my-notif/my-notif'
       },
       {
+        name:'我的场地',
+        url:'../my-site/my-site'
+      },
+      {
+        name:'我的资产',
+        url:'../my-money/my-money'
+      },
+      {
         name:'提交反馈',
         url:'../feedback/feedback'
       }
@@ -76,6 +84,14 @@ Page({
             url:'../my-account/my-account',
           },
           {
+            name:'我的场地',
+            url:'../my-site/my-site'
+          },
+          {
+            name:'我的资产',
+            url:'../my-money/my-money'
+          },
+          {
             name:'提交反馈',
             url:'../feedback/feedback'
           }
@@ -114,6 +130,14 @@ Page({
           {
             name:'新建活动',
             url:'../new-act/new-act'
+          },
+          {
+            name:'我的场地',
+            url:'../my-site/my-site'
+          },
+          {
+            name:'我的资产',
+            url:'../my-money/my-money'
           },
           {
             name:'提交反馈',

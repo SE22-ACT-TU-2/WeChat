@@ -1,0 +1,87 @@
+<!--pages/my/my-ground/my_ground.js.wxml-->
+<i-tabs current="{{ current }}"  color="#f759ab" bindchange="handleChange">
+    <i-tab key="tab1" title="已申请"></i-tab>
+    <i-tab key="tab2" title="申请中"></i-tab>
+    <i-tab key="tab3" title="已失效"></i-tab>
+</i-tabs>
+<view wx:if="{{current == 'tab1'}}">
+        <view wx:for = "{{success}}" wx:key="index">
+            <i-card title="{{item.area2}}" extra="{{item.date}}" thumb="/icon/newnorth.webp">
+             <view slot="content">
+                <view>
+                预约时间：{{item.begin_time}}； 身份：{{item.identity==0?"个人":"组织者"}}
+                </view>
+                <view>
+                 审批反馈：{{item.feedback}}
+                </view>
+                <view>
+                 是否可改期：{{item.can_change==true? "是":"否"}}
+                </view>
+             </view>
+             <view slot="footer">
+                <view>
+                <button class="btn1" 
+                bindtap="change" data-siteid ="{{item.ground_id}}" data-id = "{{item.apply_id}}"
+                data-can_change = "{{item.can_change}}" 
+                style="width: 280rpx; height: 80rpx; ">改期</button>
+                </view>
+                <view>
+                    <button class="btn2"  bindtap="cancel"  style="width: 280rpx; height: 80rpx; " data-apply_id = "{{item.apply_id}}" >取消</button>
+                 </view>
+             </view>
+            </i-card>
+        </view>
+    </view>
+
+<view wx:if="{{current == 'tab2'}}">
+        <view wx:for = "{{checking}}" wx:key="index">
+            <i-card title="{{item.area2}}" extra="{{item.date}}" thumb="/icon/beihang_background.png">
+             <view slot="content">
+                <view>
+                预约时间：{{item.begin_time}}；身份：{{item.identity==0?"个人":"组织者"}}
+                </view>
+                <view>
+                 审批反馈：{{item.feedback}}
+                </view>
+                <view>
+                 是否可改期：{{item.can_change==true? "是":"否"}}
+                </view>
+             </view>
+             <view slot="footer">
+                <view>
+                <button class="btn1" 
+                bindtap="change" data-siteid ="{{item.ground_id}}" data-id = "{{item.apply_id}}"
+                data-can_change = "{{item.can_change}}" 
+                style="width: 280rpx; height: 80rpx; ">改期</button>
+                </view>
+                <view>
+                    <button class="btn2"  bindtap="cancel"  style="width: 280rpx; height: 80rpx; " data-apply_id = "{{item.apply_id}}" >取消</button>
+                 </view>
+             </view>
+            </i-card>
+        </view>
+</view>
+
+<view wx:if="{{current == 'tab3'}}">
+        <view wx:for = "{{invalid}}" wx:key="index">
+            <i-card title="{{item.area2}}" extra="{{item.date}}" thumb="/icon/beihang_background.png">
+             <view slot="content">
+                <view>
+                预约时间：{{item.begin_time}}；身份：{{item.identity==0?"个人":"组织者"}}
+                </view>
+                <view>
+                 审批反馈：{{item.feedback}}
+                </view>
+                <view>
+                 <!--是否可改期：{{item.can_change==true? "是":"否"}}-->
+                 是否可改期：否
+                </view>
+             </view>
+             <view slot="footer">
+               
+             </view>
+            </i-card>
+        </view>
+    </view>
+
+
