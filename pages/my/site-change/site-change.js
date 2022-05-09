@@ -15,10 +15,10 @@ Page({
         arraydate : [],
         arraytime:[
           {
-            hour:8
+            hour:"08"
           },
           {
-            hour:9
+            hour:"09"
           },
           {
             hour:10

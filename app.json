@@ -6,7 +6,7 @@
     "pages/my/site-change/site-change",
     "pages/my/my-identity/my-identity",
     "pages/follows/follows",
-    
+    "pages/index/index",
     "pages/schedule/schedule",
     "pages/sections/sections-home/sections-home",
     "pages/sections/act-list/act-list",
@@ -43,8 +43,8 @@
       {
         "iconPath": "icon/home-outline.png",
         "selectedIconPath": "icon/home.png",
-        "pagePath": "pages/site/site",
-        "text": "场地"
+        "pagePath": "pages/index/index",
+        "text": "首页"
       },
       {
         "iconPath": "icon/planet-outline.png",
@@ -61,8 +61,8 @@
       {
         "iconPath": "icon/calendar-outline.png",
         "selectedIconPath": "icon/calendar.png",
-        "pagePath": "pages/schedule/schedule",
-        "text": "日程"
+        "pagePath": "pages/site/site",
+        "text": "场地"
       },
       {
         "iconPath": "icon/person-outline.png",

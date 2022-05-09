@@ -9,7 +9,7 @@
             <i-card title="{{item.area2}}" extra="{{item.date}}" thumb="/icon/newnorth.webp">
              <view slot="content">
                 <view>
-                预约时间：{{item.begin_time}}； 身份：{{item.identity==0?"个人":"组织者"}}
+                预约时间：{{item.begin_time}}点-{{item.end_time}}点； 身份：{{item.identity==0?"个人":"组织者"}}
                 </view>
                 <view>
                  审批反馈：{{item.feedback}}
@@ -38,7 +38,7 @@
             <i-card title="{{item.area2}}" extra="{{item.date}}" thumb="/icon/beihang_background.png">
              <view slot="content">
                 <view>
-                预约时间：{{item.begin_time}}；身份：{{item.identity==0?"个人":"组织者"}}
+                预约时间：{{item.begin_time}}点-{{item.end_time}}点；身份：{{item.identity==0?"个人":"组织者"}}
                 </view>
                 <view>
                  审批反馈：{{item.feedback}}
@@ -67,7 +67,7 @@
             <i-card title="{{item.area2}}" extra="{{item.date}}" thumb="/icon/beihang_background.png">
              <view slot="content">
                 <view>
-                预约时间：{{item.begin_time}}；身份：{{item.identity==0?"个人":"组织者"}}
+                预约时间：{{item.begin_time}}点-{{item.end_time}}点；身份：{{item.identity==0?"个人":"组织者"}}
                 </view>
                 <view>
                  审批反馈：{{item.feedback}}

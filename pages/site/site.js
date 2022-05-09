@@ -13,7 +13,7 @@ Page({
       price : 0,
       field : '',
       year : 0,
-      month : 0,
+      month :0,
       day : 0,
       click : true,
       identity: "请选择预约者身份",
@@ -81,10 +81,10 @@ Page({
       ],
       arraytime:[
         {
-          hour:8
+          hour:"08"
         },
         {
-          hour:9
+          hour:"09"
         },
         {
           hour:10
@@ -195,15 +195,15 @@ Page({
         longitude: app.buaaLocation.longitude,
         latitude: app.buaaLocation.latitude,
       })
+      /*interact.getArea().then(
+        (res) => {
+          arrayarea1 : res.data.area
+        }
+      )*/
         let now = new Date();
         let year = now.getFullYear();
         let month = now.getMonth() + 1;
         let day = now.getDate();
-        this.setData({
-          year: year,
-          month: month,
-          day : day
-        })
         this.setData({
           year: year,
           month: month,
@@ -222,7 +222,13 @@ Page({
       }
       this.resetlist();
       this.setData({
-        click: false
+        click: false,
+        identity: "请选择预约者身份",
+        file : "",
+        activeNames : [0],
+        same : false,
+        site : "请选择区域",
+        needdate: "请选择日期",
       })
     },
 
@@ -289,7 +295,7 @@ Page({
     },
 
     onTap() {
-      if(this.data.site=="请选择场地") {
+      if(this.data.site=="请选择区域") {
         wx.showToast({
           title: '未选择场地',
           icon: 'none',
@@ -549,6 +555,7 @@ Page({
             arrayarea2:[],
           },
         ],
+        showPrice:false,
       })
     },
 

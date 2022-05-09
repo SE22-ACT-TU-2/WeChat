@@ -34,6 +34,22 @@
     </view>
   </view>
 
+  <view class="org-wrap" wx:if="{{show}}">
+    <view class="header">
+        <text class="txt">推荐的场地</text>
+        <!-- <view class="right" id="0" bindtap="toFollowOrg">
+          <text class="all">查看全部</text>
+          <image class="arrow" src="/icon/rightArrow.png"></image>
+        </view> -->
+    </view>
+    <view class="org-list">
+      <view class="org-item" wx:for="{{site_list}}" wx:key='id' data-siteid="{{item.id}}" bindtap="toSite" hover-class="weui-cell_active">
+        <image class="org-avatar" src="{{item.avatar ? item.avatar : '/icon/person.png'}}"></image>
+        <text class="org-name">{{item.name.length <= 6 ? item.name : ut.sub(item.name) + "…"}}</text>
+      </view>
+    </view>
+  </view>
+
   <!--recommend-acts-->
   <view class="act-header">
         <text class="txt">推荐的活动</text>
@@ -62,6 +78,8 @@
       </view>
     </scroll-view>
   </view>
+
+  
 </view>
 
 <block wx:if="{{current == 'tab2'}}">

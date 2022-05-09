@@ -1324,6 +1324,18 @@ module.exports.needsite = function(area) {
   })
 }
 
+module.exports.getArea = function() {
+  return new Promise((resolve, reject) => {
+    get_request(`sites/get/`, 
+      {
+        func: module.exports.getArea,
+        funcName: 'getArea',
+        reject: reject,
+        resolve: resolve
+    })
+  })
+}
+
 module.exports.addMoney = function(money) {
   return new Promise((resolve, reject) => {
     post_request(`users/wallet/`, 

@@ -21,6 +21,10 @@ Page({
         notice : true
       },
       {
+        name:'个人日程',
+        url:'../../shedule/shedule',
+      },
+      {
         name:'通知列表',
         url:'../my-notif/my-notif'
       },
@@ -84,6 +88,10 @@ Page({
             url:'../my-account/my-account',
           },
           {
+            name:'个人日程',
+            url:'../../shedule/shedule',
+          },
+          {
             name:'我的场地',
             url:'../my-site/my-site'
           },
@@ -113,6 +121,10 @@ Page({
           {
             name:'个人信息',
             url:'../my-account/my-account'
+          },
+          {
+            name:'个人日程',
+            url:'../../shedule/shedule',
           },
           {
             name:'通知列表',

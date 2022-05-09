@@ -13,6 +13,7 @@ Page({
         info : "",
         org_list : null,
         act_list : null,
+        site_list : null,
         current : "tab1",
         longitude: 116,
         latitude : 40,
@@ -57,9 +58,11 @@ Page({
                     var locations = []
                     var acts = res.data.acts
                     var orgs = res.data.orgs
+                    var sites = res.data.sites
                     
                     this.setData({
-                      org_list : orgs.length > 10 ? orgs.slice(0,10) : orgs
+                      org_list : orgs.length > 10 ? orgs.slice(0,10) : orgs,
+                      site_list : sites.length > 10 ? sites.slice(0,10): sites,
                     })
                     for (var i = 0; i < Math.min(10, acts.length); i++) {
                         var v = acts[i]
