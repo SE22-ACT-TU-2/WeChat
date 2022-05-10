@@ -22,7 +22,7 @@ Page({
       },
       {
         name:'个人日程',
-        url:'../../shedule/shedule',
+        url:'../../schedule/schedule',
       },
       {
         name:'通知列表',
@@ -89,7 +89,7 @@ Page({
           },
           {
             name:'个人日程',
-            url:'../../shedule/shedule',
+            url:'../../schedule/schedule',
           },
           {
             name:'我的场地',
@@ -124,7 +124,7 @@ Page({
           },
           {
             name:'个人日程',
-            url:'../../shedule/shedule',
+            url:'../../schedule/schedule',
           },
           {
             name:'通知列表',
