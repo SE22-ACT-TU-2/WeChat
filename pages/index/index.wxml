@@ -13,6 +13,7 @@
 <i-tabs current="{{ current }}" color="#f759ab" bindchange="handleChange">
     <i-tab key="tab1" title="推荐"></i-tab>
     <i-tab key="tab2" title="地图"></i-tab>
+    <i-tab key="tab3" title="帖子"></i-tab>
 </i-tabs>
 </view>
 
@@ -28,22 +29,6 @@
     </view>
     <view class="org-list">
       <view class="org-item" wx:for="{{org_list}}" wx:key='id' data-orgid="{{item.id}}" bindtap="toOrg" hover-class="weui-cell_active">
-        <image class="org-avatar" src="{{item.avatar ? item.avatar : '/icon/person.png'}}"></image>
-        <text class="org-name">{{item.name.length <= 6 ? item.name : ut.sub(item.name) + "…"}}</text>
-      </view>
-    </view>
-  </view>
-
-  <view class="org-wrap" wx:if="{{show}}">
-    <view class="header">
-        <text class="txt">推荐的场地</text>
-        <!-- <view class="right" id="0" bindtap="toFollowOrg">
-          <text class="all">查看全部</text>
-          <image class="arrow" src="/icon/rightArrow.png"></image>
-        </view> -->
-    </view>
-    <view class="org-list">
-      <view class="org-item" wx:for="{{site_list}}" wx:key='id' data-siteid="{{item.id}}" bindtap="toSite" hover-class="weui-cell_active">
         <image class="org-avatar" src="{{item.avatar ? item.avatar : '/icon/person.png'}}"></image>
         <text class="org-name">{{item.name.length <= 6 ? item.name : ut.sub(item.name) + "…"}}</text>
       </view>
@@ -91,4 +76,22 @@
     bindmarkertap="goMarker"
     show-location
   ></map>
+</block>
+
+<block wx:if="{{current =='tab3'}}">
+  <!-- pages/topic/index.wxml -->
+
+<!-- 话题内容 -->
+<view class="topic-list">
+	<topic-item topic-item-class="topic-item" wx:for="{{topics}}" wx:key="index" topic="{{item}}" isOwner="{{userId === topic.user.id }}" data-index="{{index}}" bind:moreIconTap="deleteTopic" bind:commentIconTap="gotoTopicDetail" bind:starIconTap="onStarTap" bind:viewIconTap="gotoTopicDetail" />
+</view>
+
+<!-- 编辑按钮 -->
+<view class="btn-edit" bindtap="onEditTap">
+  <i-icon type="brush_fill" color="#fff" size="30" />
+</view>
+
+<!-- nothing -->
+<nothing wx:if="{{topics.length === 0}}" pic="../../images/pic_topic.png" tip="暂时没有话题" />
+
 </block>

@@ -1,0 +1,26 @@
+<!--components/topic-item/index.wxml-->
+
+<!-- 话题单项 -->
+<view class="topic-item-class topic-item" wx:if="{{topic}}">
+  <!-- 话题头部 -->
+  <view class="header">
+    <view class="header-left">
+      <avatar src="{{topic.user.avatar}}" user-id="{{topic.user.id}}" size="80" />
+      <view class="header-info">
+        <view class="info-top">
+          <nickname nickname="{{topic.user.nickName}}" user-id="{{topic.user.id}}" />
+        </view>
+        <text class="time">{{topic.create_time}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 话题内容 -->
+  <view class="topic-content" bindtap="gotoTopicDetail">
+    <view class="{{!showDetail && topic.content.length > maxContentLen && !topic.expand ? 'content-text-expand' : 'content-text'}}">{{topic.content}}</view>
+    <text wx:if="{{!showDetail && topic.content.length > maxContentLen}}" class="text-expand" catchtap="onExpandTap">{{!topic.expand ? '展开' : '收起'}}</text>
+  </view>
+
+  <!-- 话题底部 -->
+  <favor-bar comment-count="{{topic.comment_count}}" star-count="{{topic.star_count}}" view-count="{{topic.click_count}}" has-comment="{{topic.has_comment}}" has-star="{{topic.has_star}}" />
+</view>

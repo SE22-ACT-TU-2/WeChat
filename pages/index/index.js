@@ -18,7 +18,17 @@ Page({
         longitude: 116,
         latitude : 40,
         markers : [],
-        show : false
+        show : false,
+        topics: [
+          {
+            id : 1,
+            user:{avatar:"",id:1,nickName:"yao"},
+            create_time:"now",
+            content:"我爱人类",
+            click_count:10,
+          }
+
+        ],
     },
 
     onLoad: function (options) {
@@ -58,7 +68,6 @@ Page({
                     var locations = []
                     var acts = res.data.acts
                     var orgs = res.data.orgs
-                    var sites = res.data.sites
                     
                     this.setData({
                       org_list : orgs.length > 10 ? orgs.slice(0,10) : orgs,
@@ -94,7 +103,11 @@ Page({
                     console.log("act list", this.data.act_list)
                 }
               )
-              
+              /*interact.gettopic().then(
+                (res) => {
+                  topics : res.data.topics
+                }
+              )*/
               
 
               
@@ -151,5 +164,88 @@ Page({
       wx.navigateTo({
         url: `../sections/act-detail/act-detail?actId=${e.detail.markerId}`,
       })
+    },
+
+    onEditTap () {
+      wx.navigateTo({
+        url: `../topic-edit/index`,
+      })
+    },
+
+    /**
+   * 删除话题
+   */
+  deleteTopic(e) {
+    const topic = this.data.topics[e.currentTarget.dataset.index]
+    var that = this
+    if (topic.user.id == app.loginData.userId) {
+        dialog.linShow({
+        type: "confirm",
+        title: "提示",
+        content: "确定要删除该话题？",
+        success: (res) => {
+          if (res.confirm) {
+            interact.deltopic(topic.id).then(
+              (res)=> {
+                wx.showToast({
+                  icon : "success",
+                  title:res.data.msg
+                })
+                that.onShow()
+              }
+            )
+          }
+        }
+      })
+    } 
+  },
+
+  /**
+   * 跳转话题详情页
+   */
+  gotoTopicDetail(event) {
+    const index = event.currentTarget.dataset.index
+    const topics = this.data.topics
+    const topic = topics[index]
+    let url = "../topic-detail/index?"
+
+    if (event.type === "commentIconTap") {
+      url += "focus=true&"
     }
+    topic.click_count++
+    this.setData({
+      topics: topics
+    })
+    wx.navigateTo({
+      url: url + "topicId=" + topic.id
+    })
+  },
+
+  /**
+   * 点击收藏
+   */
+  onStarTap(event) {
+    const index = event.currentTarget.dataset.index
+    const topics = this.data.topics
+    const topic = topics[index]
+
+    interact.startopic(topic.id).then(
+      (res)=> {
+        if(res.code===201) {
+          const hasStar = topic.has_star
+          topic.has_star = !topic.has_star
+          if (hasStar) {
+            topic.star_count--
+          } else {
+            topic.star_count++
+          }
+          this.setData({
+            topics: topics
+          })
+        }
+      }
+    )
+  },
+
+  
 })
