@@ -1,0 +1,10 @@
+<!-- pages/topic-edit/index.wxml -->
+
+<!-- 话题发布 -->
+<scroll-view style="height: {{height}}px" scroll-y scroll-with-animation enable-back-to-top>
+	<text class="title">内容（必填）</text>
+	<i-input i-class="input-textarea" value="{{content}}" type="textarea" placeholder="输入您的交友期望" auto-focus="{{true}}" maxlength="300" bind:change="setContent"/>
+</scroll-view>
+
+<button class="btn-send" hover-class="btn-send-hover" bindtap="sumitTopic">立即发布</button>
+

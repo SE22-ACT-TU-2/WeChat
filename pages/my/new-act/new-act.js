@@ -4,7 +4,7 @@ const util = require("../../../utils/util.js")
 
 const chooseLocation = requirePlugin('chooseLocation')
 
-const key = 'GEUBZ-V2TRO-SEPW7-S3UZV-QJDE6-OUFE4'; //使用在腾讯位置服务申请的key
+const key = 'JXUBZ-Z36K4-NUOUO-DKVXN-7GN37-3RBPJ';
 const referer = '一苇以航-地图'; //调用插件的app的名称
 const category = '生活服务';
 

@@ -8,8 +8,9 @@
 
 .input-textarea {
   width: 100% !important;
-  height: 250rpx;
-  background: #fff;
+  height: 200rpx;
+  background: rgba(29, 193, 163, 0.437);
+  border-radius: 30rpx;
 }
 
 .inner-textarea {

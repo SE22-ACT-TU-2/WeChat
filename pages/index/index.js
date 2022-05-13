@@ -167,8 +167,9 @@ Page({
     },
 
     onEditTap () {
+      console.log("form")
       wx.navigateTo({
-        url: `../topic-edit/index`,
+        url: `../topic-edit/topic-edit`,
       })
     },
 
@@ -179,12 +180,11 @@ Page({
     const topic = this.data.topics[e.currentTarget.dataset.index]
     var that = this
     if (topic.user.id == app.loginData.userId) {
-        dialog.linShow({
-        type: "confirm",
-        title: "提示",
-        content: "确定要删除该话题？",
-        success: (res) => {
-          if (res.confirm) {
+      wx.showModal({
+        title: '警告',
+        content: '确定要删除该话题？',
+        success: function (res) {
+          if (res.confirm) {//这里是点击了确定以后
             interact.deltopic(topic.id).then(
               (res)=> {
                 wx.showToast({
@@ -197,6 +197,11 @@ Page({
           }
         }
       })
+    } else {
+      wx.showToast({
+        icon : "none",
+        title:"不是您的帖子"
+      })
     } 
   },
 
@@ -207,7 +212,7 @@ Page({
     const index = event.currentTarget.dataset.index
     const topics = this.data.topics
     const topic = topics[index]
-    let url = "../topic-detail/index?"
+    let url = "../topic-detail/topic-detail?"
 
     if (event.type === "commentIconTap") {
       url += "focus=true&"

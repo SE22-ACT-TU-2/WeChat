@@ -79,7 +79,7 @@ Component({
       })
 
       wx.navigateTo({
-        url: "/pages/topic-detail/index?topicId=" + topic.id
+        url: "/pages/topic-detail/topic-detail?topicId=" + topic.id
       })
     },
 

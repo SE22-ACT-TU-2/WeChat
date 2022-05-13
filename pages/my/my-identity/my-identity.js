@@ -11,7 +11,6 @@ Page({
       identity: "",
       content1: "",
       content2: "",
-      content3: "",
       tempFilePaths:[],
     },
 
@@ -49,8 +48,6 @@ Page({
             console.log(res);
             this.setData({
               identity: res.data.msg,
-              content1: res.data.student_id,
-              content2: res.data.real_name
             })
           }
         )
@@ -60,7 +57,7 @@ Page({
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-
+//
     },
 
     /**
@@ -85,6 +82,7 @@ Page({
     },
   
     contactHandler1: function(e) {
+      console.log(e)
       this.setData({
         content1 : e.detail
       })
@@ -96,22 +94,24 @@ Page({
     },
     
     getPhoto : function() {
+      var that = this
       wx.chooseImage({
         count: 1,
         sizeType: ['original', 'compressed'],
         sourceType: ['album', 'camera'],
         success : (res) =>{
         // tempFilePath可以作为img标签的src属性显示图片
-        this.setData({
+        that.setData({
           tempFilePaths : res.tempFilePaths
         })
-        console.log(this.data.tempFilePaths)
+        console.log(that.data.tempFilePaths)
       }
       })
     },
 
     upload : function() {
       const path = this.data.tempFilePaths[0]
+      var that = this
       console.log(this.data.content1)
       wx.uploadFile({
         // filePath: path,
@@ -132,10 +132,11 @@ Page({
         /////
         formData:{
           user_id : App.loginData.userId,
-          student_id : this.data.content1,
-          name : this.data.content2,
+          student_id : that.data.content1,
+          name : that.data.content2,
         },
         success(res) {
+          console.log(that.data.content2)
           wx.showToast({
             title : res.data.msg,
             icon : "none"

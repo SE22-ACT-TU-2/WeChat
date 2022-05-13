@@ -1,8 +1,8 @@
 // pages/topic-detail/index.js
 import { Paging } from "../../utils/paging"
 const app = getApp()
-const api = app.api
-const wxutil = app.wxutil
+const interact = require("../../utils/interact.js")
+const util = require("../../utils/util.js")
 
 Page({
   data: {

@@ -28,7 +28,7 @@ Component({
   methods: {
     /**
      * 跳转名片页或授权页
-     */
+     
     onAvatarTap() {
       if (app.globalData.userDetail) {
         wx.navigateTo({
@@ -39,6 +39,6 @@ Component({
           url: "/pages/auth/index"
         })
       }
-    }
+    }*/
   }
 })

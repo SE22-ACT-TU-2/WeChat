@@ -13,6 +13,7 @@
         <text class="time">{{topic.create_time}}</text>
       </view>
     </view>
+    <i-icon l-class="icon-more" type="delete" bindtap="onMoreIconTap" />
   </view>
 
   <!-- 话题内容 -->

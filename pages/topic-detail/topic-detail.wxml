@@ -25,15 +25,3 @@
 	<input class="edit-input" placeholder="{{placeholder}}" maxlength="150" value="{{comment}}" focus="{{focus}}" confirm-hold confirm-type="send" bindinput="setComment" bindconfirm="onCommntBtnTap" />
 	<l-button shape="semicircle" size="mini" bg-color="#337559" width="125" height="60" bind:lintap="onCommntBtnTap">评论</l-button>
 </view>
-
-<!-- nothing -->
-<nothing wx:if="{{!topic}}" pic="../../images/icon_nothing/pic_topic.png" tip="该话题消失了" />
-
-<!-- 操作菜单 -->
-<l-action-sheet />
-
-<!-- 消息提示 -->
-<l-message />
-
-<!-- 消息对话框 -->
-<l-dialog id="dialog" />

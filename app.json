@@ -2,8 +2,8 @@
   "pages": [
     "pages/my/my-home/my-home",
     "pages/site/site",
-    "pages/topic-detail/index",
-    "pages/topic-edit/index",
+    "pages/topic-detail/topic-detail",
+    "pages/topic-edit/topic-edit",
     "pages/my/my-site/my-site",
     "pages/my/site-change/site-change",
     "pages/my/my-identity/my-identity",

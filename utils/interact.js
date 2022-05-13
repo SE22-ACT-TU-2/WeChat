@@ -34,6 +34,9 @@ function send_receivers_to_websocket(result) {
 
 //PUT请求函数 urlpath是请求路径（不包含前面的/） data是请求体 funcInfo是调用函数信息
 function put_request(urlpath, data, funcInfo) {
+  if (!urlpath.endsWith("/")) {
+    urlpath = urlpath + "/"
+  }
   lg.checkLoginData().then(login => {
     wx.request({
       url: getAPIUrl(urlpath),
@@ -150,6 +153,9 @@ function post_request(urlpath, data, funcInfo) {
 
 //GET请求函数 urlpath是请求路径（不包含前面的/）funcInfo是调用函数信息
 function get_request(urlpath, funcInfo) {
+  if (!urlpath.endsWith("/")) {
+    urlpath = urlpath + "/"
+  }
   lg.checkLoginData().then(login => {
     wx.request({
       url: getAPIUrl(urlpath),
