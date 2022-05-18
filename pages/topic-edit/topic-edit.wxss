@@ -89,7 +89,7 @@
   font-size: 28rpx;
   font-weight: 400;
   color: #fff;
-  background: #337559;
+  background: #7ab7fc;
   border-radius: 0 !important;
   padding: 20rpx 0;
   padding-bottom: calc(20rpx + constant(safe-area-inset-bottom));

@@ -13,13 +13,18 @@
         <text class="time">{{topic.create_time}}</text>
       </view>
     </view>
-    <i-icon l-class="icon-more" type="delete" bindtap="onMoreIconTap" />
+    <i-icon i-class="icon-more" type="delete" bindtap="onMoreIconTap" />
   </view>
 
   <!-- 话题内容 -->
   <view class="topic-content" bindtap="gotoTopicDetail">
     <view class="{{!showDetail && topic.content.length > maxContentLen && !topic.expand ? 'content-text-expand' : 'content-text'}}">{{topic.content}}</view>
     <text wx:if="{{!showDetail && topic.content.length > maxContentLen}}" class="text-expand" catchtap="onExpandTap">{{!topic.expand ? '展开' : '收起'}}</text>
+  </view>
+
+    <!-- 话题标签 -->
+  <view class="tags-list" wx:if="{{showTags && topic.label.length > 0}}">
+    <i-tag wx:for="{{topic.label}}" wx:key="index" i-class="tag" type="dot" color="default" data-label-id="{{item.id}}">#{{item.name}}</i-tag>
   </view>
 
   <!-- 话题底部 -->

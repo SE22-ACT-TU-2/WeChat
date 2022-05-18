@@ -1,0 +1,30 @@
+<!--components/profile-card/index.wxml-->
+
+<!-- 资料卡片 -->
+<view class="profile-card">
+
+  <!-- 用户 -->
+  <view class="user-info">
+    <view class="avatar-info">
+      <image class="avatar" src="{{user.avatar ? user.avatar : defaultAvatar}}" />
+    </view>
+
+    <view class="btn-group">
+      <i-button wx:if="{{!isOwner}}" i-class="{{user.has_follow ? 'btn-unfollow' : 'btn-follow'}}" color="{{user.has_follow ? 'default' : 'blue'}}" shape="circle" size="small" bind:click="onFollowTap">{{user.has_follow ? '取消关注' : '关注'}}</i-button>
+    </view>
+
+    <text class="nickname">{{user.nickName ? user.nickName : defaultNickname}}</text>
+    <text class="signature">{{user.motto ? user.motto : defaultSignature}}</text>
+
+    <view class="follow-group">
+      <view class="follow" >
+        <text class="follow-num">{{user.follower ? user.follower : '0'}}</text>
+        <text class="follow-text">{{isOwner ? '关注我的' : '关注TA的'}}</text>
+      </view>
+      <view class="follow following" >
+        <text class="follow-num">{{user.following ? user.following : '0'}}</text>
+        <text class="follow-text">{{isOwner ? '我关注的' : 'TA关注的'}}</text>
+      </view>
+    </view>
+  </view>
+</view>

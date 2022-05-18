@@ -1,0 +1,18 @@
+<!--components/comment-item/index.wxml-->
+
+<!-- 评论单项 -->
+<view class="comment-item">
+  <avatar src="{{comment.user.avatar}}" user-id="{{comment.user.id}}" />
+  <view class="comment-right {{!hasBorder ? 'no-border' : ''}}">
+    <view class="comment-top">
+      <nickname nickname="{{comment.user.nickName}}" user-id="{{comment.user.id}}" />
+      <view class="time">{{comment.create_time}}</view>
+    </view>
+    <view class="comment-bottom">
+      <view class="content">
+        {{comment.content}}
+      </view>
+      <view class="delete" wx:if="{{isOwner}}" catchtap="onDeleteTap">删除</view>
+    </view>
+  </view>
+</view>

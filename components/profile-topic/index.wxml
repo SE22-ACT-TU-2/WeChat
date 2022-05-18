@@ -1,0 +1,11 @@
+<!--components/profile-topic/index.wxml-->
+
+<!-- 所属话题 -->
+<view class="profile-topic">
+  <view class="item {{topics.length - 1 === index ? 'no-border' : ''}}" wx:for="{{topics}}" wx:key="index" data-index="{{index}}" bindtap="gotoTopicDetail">
+    <view class="item-right">
+      <text class="time">{{item.create_time}}</text>
+      <text class="content">{{item.content}}</text>
+    </view>
+  </view>
+</view>

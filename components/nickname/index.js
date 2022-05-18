@@ -27,13 +27,9 @@ Component({
      * 跳转名片页或授权页
      */
     onNicknameTap() {
-      if (app.globalData.userDetail) {
+      if(app.loginData.userId!=this.data.userId) {
         wx.navigateTo({
-          url: "/pages/visiting-card/index?userId=" + this.data.userId
-        })
-      } else {
-        wx.navigateTo({
-          url: "/pages/auth/index"
+          url: "/pages/visiting-card/visiting-card?userId=" + this.data.userId
         })
       }
     }

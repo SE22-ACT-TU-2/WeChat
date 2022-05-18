@@ -80,7 +80,7 @@
 
 <block wx:if="{{current =='tab3'}}">
   <!-- pages/topic/index.wxml -->
-
+<tags-pannel labels="{{labels}}" active-label-id="{{labelId}}" bind:tagtap="onTagTap" />
 <!-- 话题内容 -->
 <view class="topic-list">
 	<topic-item topic-item-class="topic-item" wx:for="{{topics}}" wx:key="index" topic="{{item}}" isOwner="{{userId === topic.user.id }}" data-index="{{index}}" bind:moreIconTap="deleteTopic" bind:commentIconTap="gotoTopicDetail" bind:starIconTap="onStarTap" bind:viewIconTap="gotoTopicDetail" />

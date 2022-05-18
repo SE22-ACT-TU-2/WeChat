@@ -1452,3 +1452,147 @@ module.exports.changeidentity = function (student_id,name,picture) {
     })
   })
 }
+//todo
+module.exports.gettopic = function (labelId) {
+  return new Promise((resolve, reject) => {
+    post_request(`users/verify/`,
+      {
+        labelId:labelId,
+        userId:app.loginData.userId,
+      },
+      {
+        func: module.exports.gettopic,
+        funcName: 'gettopic',
+        reject: reject,
+        resolve: resolve
+    })
+  })
+}
+
+module.exports.deltopic = function (topicId) {
+  return new Promise((resolve, reject) => {
+    get_request(`users/verify/${topicId}`,
+      {
+        func: module.exports.deltopic,
+        funcName: 'deltopic',
+        reject: reject,
+        resolve: resolve
+    })
+  })
+}
+
+module.exports.startopic = function (topicId) {
+  return new Promise((resolve, reject) => {
+    post_request(`users/verify/`,
+      {
+        userId:app.loginData.userId,
+        topicId:topicId,
+      },
+      {
+        func: module.exports.startopic,
+        funcName: 'startopic',
+        reject: reject,
+        resolve: resolve
+    })
+  })
+}
+
+module.exports.submittopic = function (content) {
+  return new Promise((resolve, reject) => {
+    post_request(`users/verify/`,
+      {
+        userId:app.loginData.userId,
+        content:content
+      },
+      {
+        func: module.exports.submittopic,
+        funcName: 'submittopic',
+        reject: reject,
+        resolve: resolve
+    })
+  })
+}
+
+module.exports.getotheruser = function (otheruserid) {
+  return new Promise((resolve, reject) => {
+    post_request(`users/verify/`,
+      {
+        userId:app.loginData.userId,
+        otheruserid:otheruserid
+      },
+      {
+        func: module.exports.getotheruser,
+        funcName: 'getotheruser',
+        reject: reject,
+        resolve: resolve
+    })
+  })
+}
+
+module.exports.follow = function (otheruserid) {
+  return new Promise((resolve, reject) => {
+    post_request(`users/verify`,
+      {
+        userId:app.loginData.userId,
+        otheruserid:otheruserid
+      },
+      {
+        func: module.exports.follow,
+        funcName: 'follow',
+        reject: reject,
+        resolve: resolve
+    })
+  })
+}
+
+module.exports.gettopicdetail = function (topicId) {
+  return new Promise((resolve, reject) => {
+    get_request(`users/verify/${topicId}`,
+      {
+        func: module.exports.gettopicdetail,
+        funcName: 'gettopicdetail',
+        reject: reject,
+        resolve: resolve
+    })
+  })
+}
+
+module.exports.getalllabels = function () {
+  return new Promise((resolve, reject) => {
+    get_request(`users/verify`,
+      {
+        func: module.exports.getalllabels,
+        funcName: 'getalllabels',
+        reject: reject,
+        resolve: resolve
+    })
+  })
+}
+
+module.exports.sendcomment = function (content) {
+  return new Promise((resolve, reject) => {
+    post_request(`users/verify/`,
+      {
+        userId:app.loginData.userId,
+        content:content
+      },
+      {
+        func: module.exports.sendcomment,
+        funcName: 'sendcomment',
+        reject: reject,
+        resolve: resolve
+    })
+  })
+}
+
+module.exports.delcomment = function (commentId) {
+  return new Promise((resolve, reject) => {
+    get_request(`users/verify/${commentId}`,
+      {
+        func: module.exports.delcomment,
+        funcName: 'delcomment',
+        reject: reject,
+        resolve: resolve
+    })
+  })
+}

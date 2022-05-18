@@ -22,13 +22,15 @@ Page({
         topics: [
           {
             id : 1,
-            user:{avatar:"",id:1,nickName:"yao"},
+            user:{avatar:"",id:1,nickName:"11111"},
             create_time:"now",
             content:"我爱人类",
             click_count:10,
           }
 
         ],
+        labelId:0,
+        labels:[{id:0,name:"全部"},{id:1,name:"你们"}],
     },
 
     onLoad: function (options) {
@@ -36,6 +38,14 @@ Page({
         longitude: app.buaaLocation.longitude,
         latitude: app.buaaLocation.latitude,
       })
+      /**/
+      interact.getalllabels().then(
+        (res) => {
+          this.setData({
+            labels:res.data.labels,
+          })
+        }
+      )
     },
 
     onShow: function (e) {
@@ -71,7 +81,6 @@ Page({
                     
                     this.setData({
                       org_list : orgs.length > 10 ? orgs.slice(0,10) : orgs,
-                      site_list : sites.length > 10 ? sites.slice(0,10): sites,
                     })
                     for (var i = 0; i < Math.min(10, acts.length); i++) {
                         var v = acts[i]
@@ -103,11 +112,15 @@ Page({
                     console.log("act list", this.data.act_list)
                 }
               )
-              /*interact.gettopic().then(
-                (res) => {
-                  topics : res.data.topics
+              interact.getalllabels().then(
+                (res)=>{
+                  this.setData({
+                    labels:res.data.labels,
+                  })
                 }
-              )*/
+              )
+              this.init(0)
+              
               
 
               
@@ -164,6 +177,17 @@ Page({
       wx.navigateTo({
         url: `../sections/act-detail/act-detail?actId=${e.detail.markerId}`,
       })
+    },
+    //new
+    init(e) {
+      console.log(e)
+      interact.gettopic(e).then(
+        (res) => {
+          this.setData({
+            topics:res.data.topics
+          })
+        }
+      )
     },
 
     onEditTap () {
@@ -252,5 +276,15 @@ Page({
     )
   },
 
-  
+  /**
+   * 标签切换
+   */
+   onTagTap(event) {
+     console.log(event)
+    const labelId = event.detail.activeLabelId
+    this.setData({
+      labelId: labelId
+    })
+    this.init(labelId)
+  },
 })

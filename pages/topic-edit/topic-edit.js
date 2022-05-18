@@ -8,10 +8,18 @@ Page({
   data: {
     height: 1000,  // 内容区高度
     content: null,
+    labals: null,
   },
 
   onLoad() {
     this.getScrollHeight()
+    interact.getalllabels().then(
+      (res) => {
+        this.setData({
+          labals:res.data.labals
+        })
+      }
+    )
   },
 
   onShow() {
@@ -68,5 +76,9 @@ Page({
     )
   },
 
-  
+  onTagTap(e) {
+    const detail = e.detail
+    console.log(e)
+//todo
+  },
 })

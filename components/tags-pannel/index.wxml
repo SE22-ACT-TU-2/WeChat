@@ -1,0 +1,12 @@
+<!--components/tags-pannel/index.wxml-->
+
+<!-- 标签面板 -->
+<view class="tags-pannel">
+  <!-- 标签栏 -->
+  <scroll-view class="tag-scroll" scroll-x enable-flex scroll-with-animation scroll-into-view="{{'tag_' + activeLabelId}}">
+    <view wx:for="{{labels}}" wx:key="index" id="{{'tag_' + item.id}}">
+      <i-tag i-class="tag" type="dot" plain="{{activeLabelId === item.id}}" color="{{activeLabelId === item.id ? 'blue' : 'default'}}" data-label-id="{{item.id}}" checkable="true" bind:change="onTagTap">
+        #{{item.name}}</i-tag>
+    </view>
+  </scroll-view>
+</view>

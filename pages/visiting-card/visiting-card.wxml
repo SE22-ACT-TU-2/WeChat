@@ -1,0 +1,8 @@
+<!-- pages/visiting-card/index.wxml -->
+
+<!-- 用户卡片 -->
+<profile-card wx:if="{{user}}" user="{{user}}" isOwner="{{false}}" bind:followTap="onFollowTap" />
+
+<!-- Ta的动态 -->
+<nothing wx:if="{{topics.length === 0}}" nothing-class="nothing" pic="../../images/pic_topic.png" tip="TA还没有发布帖子" />
+<profile-topic topics="{{topics}}" isOwner="{{false}}" />
