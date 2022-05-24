@@ -125,7 +125,7 @@ module.exports.catchUnLogin = function(funcInfo) {
 //success: 调用成功，返回结果的函数。
 //fail: 调用失败，返回错误信息的函数。
 //也可以使用Promise写法。例如调用时: api.login({code: res.code}).then((res)=>{/*正确登录的逻辑段*/}.catch((e)=>{/*发生错误*/}))
-function login_(options) {
+module.exports.login_ = function(options) {
   return new Promise((resolve, reject) => {
 
     //检查options

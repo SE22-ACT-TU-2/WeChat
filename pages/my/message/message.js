@@ -448,6 +448,12 @@ Page({
     },
 
     onLoad(options) {
+        /*
+        this.setData({
+            friendid:options.user.id,
+            friendName:options.user.nickName,
+            friendAvatar:options.user.avatar
+        })*/
         var nowDate = new Date();
         var that = this;
         this.getMsgList();
