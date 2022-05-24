@@ -6,6 +6,7 @@
     "pages/topic-detail/topic-detail",
     "pages/topic-edit/topic-edit",
     "pages/my/my-site/my-site",
+    "pages/my/my-friend/my-friend",
     "pages/my/site-change/site-change",
     "pages/my/my-identity/my-identity",
     "pages/follows/follows",
@@ -118,6 +119,7 @@
     "tags-pannel": "./components/tags-pannel/index",
     "profile-card": "./components/profile-card/index",
     "profile-topic": "./components/profile-topic/index",
+    "follow-item": "./components/follow-item/index",
     "topic-item": "./components/topic-item/index"
   },
   "plugins": {

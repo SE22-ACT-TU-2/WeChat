@@ -11,7 +11,7 @@
   padding: 30rpx;
   background: #fff;
   border-radius: 20rpx 20rpx 0 0;
-  top:50px;
+  top:40px;
 }
 
 .avatar-info {

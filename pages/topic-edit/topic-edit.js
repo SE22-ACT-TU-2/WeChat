@@ -8,7 +8,7 @@ Page({
   data: {
     height: 1000,  // 内容区高度
     content: null,
-    labals: null,
+    labels: null,
   },
 
   onLoad() {
@@ -16,7 +16,7 @@ Page({
     interact.getalllabels().then(
       (res) => {
         this.setData({
-          labals:res.data.labals
+          labels:res.data
         })
       }
     )
@@ -63,15 +63,15 @@ Page({
       })
       return
     }
-
-    interact.submittopic(content).then(
+    console.log(this.data.labels)
+    interact.submittopic(content,this.data.labels).then(
       (res) => {
         wx.showToast({
           title:res.data.msg
         })
-        return {
-          path : "../index/index"
-        }
+        wx.navigateBack({
+          delta: 0,
+        })
       }
     )
   },
@@ -80,5 +80,8 @@ Page({
     const detail = e.detail
     console.log(e)
 //todo
+    this.setData({
+      ['labels['+detail.name+'].active'] : detail.checked
+    })
   },
 })

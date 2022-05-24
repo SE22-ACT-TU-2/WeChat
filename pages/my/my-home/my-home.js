@@ -29,6 +29,10 @@ Page({
         url:'../my-notif/my-notif'
       },
       {
+        name:'关注好友',
+        url:'../my-friend/my-friend'
+      },
+      {
         name:'我的场地',
         url:'../my-site/my-site'
       },
@@ -92,6 +96,10 @@ Page({
             url:'../../schedule/schedule',
           },
           {
+            name:'关注好友',
+            url:'../my-friend/my-friend'
+          },
+          {
             name:'我的场地',
             url:'../my-site/my-site'
           },
@@ -134,6 +142,10 @@ Page({
 	  {
             name:'我的聊天',
             url:'../message/message'
+          },
+          {
+            name:'关注好友',
+            url:'../my-friend/my-friend'
           },
           {
             name:'我的组织',

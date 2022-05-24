@@ -29,18 +29,28 @@ Page({
       this.setData({
         focus: true
       })
-    }/*
+    }
     interact.gettopicdetail(options.topicId).then(
       (res)=> {
+        var comments = res.data.comments
+        for (var i = 0;i<comments.length;i++) {
+          var v = comments[i]
+          //v.create_time = v.create_time.split(".")[0].replace("T", " ")
+          v.create_time=util.getRelativeTime(v.create_time)
+        }
+        var topic = res.data.topic
+        //topic.create_time = topic.create_time.split(".")[0].replace("T", " ")
+        topic.create_time=util.getRelativeTime(topic.create_time)
         this.setData({
-          comments:res.data.comments,
+          comments:comments,
           userId:app.loginData.userId,
-          topic:res.data.topic,
+          topic:topic,
           stars:res.data.stars
         })
+        console.log(this.data.comments)
       }
-    )*/
-    this.setData({
+    )
+    /*this.setData({
       topic:{
         id : 1,
         user:{avatar:"",id:1,nickName:"11111"},
@@ -51,30 +61,48 @@ Page({
       comments:[{user:{avatar:"",id:1,nickName:"11111"},content:"hao",id:1}],
       userId:2,
       stars:[{user:{avatar:"",id:1,nickName:"11111"}}]
-    })
+    })*/
   },
 
   onShow() {
+    interact.gettopicdetail(this.data.topic.id).then(
+      (res)=> {
+        var comments = res.data.comments
+        for (var i = 0;i<comments.length;i++) {
+          var v = comments[i]
+          //v.create_time = v.create_time.split(".")[0].replace("T", " ")
+          v.create_time=util.getRelativeTime(v.create_time)
+        }
+        var topic = res.data.topic
+        //topic.create_time = topic.create_time.split(".")[0].replace("T", " ")
+        topic.create_time=util.getRelativeTime(topic.create_time)
+        this.setData({
+          comments:comments,
+          topic:topic,
+          stars:res.data.stars
+        })
+        console.log(this.data.comments)
+      }
+    )
   },
 
   /**
    * 点击收藏
    */
    onStarTap() {
+    const topic = this.data.topic
     interact.startopic(this.data.topic.id).then(
       (res)=> {
-        if(res.code===201) {
-          const hasStar = topic.has_star
-          topic.has_star = !topic.has_star
-          if (hasStar) {
-            topic.star_count--
-          } else {
-            topic.star_count++
-          }
-          this.setData({
-            topics: topics
-          })
+        if(res.data.msg==="收藏成功") {
+          topic.star_count++
+          topic.has_star=true
+        } else {
+          topic.star_count--
+          topic.has_star=false
         }
+        this.setData({
+          topic: topic
+        })
       }
     )
   },
@@ -138,10 +166,10 @@ Page({
         title: '评论内容不能为空',
       })
     } else {
-      interact.sendcomment(content).then(
+      interact.sendcomment(content,this.data.topic.id).then(
         (res)=> {
-          if(res.code==201) {
-            that.onLoad()
+          if(res.data.msg=="评论成功") {
+            that.onShow()
           }
         }
       )
@@ -153,6 +181,8 @@ Page({
    */
   deleteComment(event) {
     const commentId = event.detail.commentId
+    var that = this
+    console.log(event)
     wx.showModal({
       title: '警告',
       content: '确定要删除该评论？',
@@ -164,7 +194,7 @@ Page({
                 icon : "success",
                 title:res.data.msg
               })
-              that.onLoad()
+              that.onShow()
             }
           )
         }

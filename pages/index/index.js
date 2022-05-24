@@ -38,14 +38,6 @@ Page({
         longitude: app.buaaLocation.longitude,
         latitude: app.buaaLocation.latitude,
       })
-      /**/
-      interact.getalllabels().then(
-        (res) => {
-          this.setData({
-            labels:res.data.labels,
-          })
-        }
-      )
     },
 
     onShow: function (e) {
@@ -115,11 +107,14 @@ Page({
               interact.getalllabels().then(
                 (res)=>{
                   this.setData({
-                    labels:res.data.labels,
+                    labels:res.data,
+                    labelId:0
                   })
+                  console.log(res)
+                  this.init(0)
                 }
               )
-              this.init(0)
+              
               
               
 
@@ -183,8 +178,14 @@ Page({
       console.log(e)
       interact.gettopic(e).then(
         (res) => {
+          var topics = res.data
+          for(var i =0;i<topics.length;i++) {
+            var v = topics[i]
+            //v.create_time = v.create_time.split(".")[0].replace("T", " ")
+            v.create_time=util.getRelativeTime(v.create_time)
+          }
           this.setData({
-            topics:res.data.topics
+            topics:topics
           })
         }
       )
@@ -257,21 +258,19 @@ Page({
     const index = event.currentTarget.dataset.index
     const topics = this.data.topics
     const topic = topics[index]
-
+    console.log(topic)
     interact.startopic(topic.id).then(
       (res)=> {
-        if(res.code===201) {
-          const hasStar = topic.has_star
-          topic.has_star = !topic.has_star
-          if (hasStar) {
-            topic.star_count--
-          } else {
-            topic.star_count++
-          }
-          this.setData({
-            topics: topics
-          })
+        if(res.data.msg==="收藏成功") {
+          topic.star_count++
+          topic.has_star=true
+        } else {
+          topic.star_count--
+          topic.has_star=false
         }
+        this.setData({
+          topics: topics
+        })
       }
     )
   },

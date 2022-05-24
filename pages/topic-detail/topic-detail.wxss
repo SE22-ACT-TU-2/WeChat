@@ -25,3 +25,7 @@
   width: 550rpx !important;
   height: 88rpx;
 }
+
+.button {
+  text-align: center;
+}

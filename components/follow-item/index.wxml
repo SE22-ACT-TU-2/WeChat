@@ -1,0 +1,14 @@
+<!--components/follow-item/index.wxml-->
+
+<!-- 关注单项 -->
+<view wx:if="{{user}}" class="follow-item {{!hasBorder ? 'no-border' : ''}}">
+  <view class="user-info">
+    <avatar src="{{user.avatar}}" user-id="{{user.id}}" />
+    <view class="info-right">
+      <nickname nickname="{{user.nickName}}" user-id="{{user.id}}" />
+    </view>
+  </view>
+  <view class="btn-group">
+    <i-button wx:if="{{change}}" color="{{'blue'}}" shape="circle" size="small" bind:click="onchat">{{'聊天'}}</i-button>
+  </view>
+</view>

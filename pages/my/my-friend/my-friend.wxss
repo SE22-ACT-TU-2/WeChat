@@ -1,0 +1,15 @@
+/* pages/my/my-ground/my_ground.js.wxss */
+.btn1{
+  background-color: #7ab7fc;
+  color: #ffffff;
+  float: left;
+  width: 270rpx; 
+  height: 80rpx;
+}
+.btn2{
+  background-color: #7ab7fc;
+  color: #ffffff;
+  float: right;
+  width: 270rpx; 
+  height: 80rpx;
+}
