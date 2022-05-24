@@ -67,7 +67,7 @@ Page({
    */
   onFollowTap() {
     const user = this.data.user
-
+    var that = this
     if (user.has_follow) {
       wx.showModal({
         content: '您确定要取消关注吗',
@@ -75,9 +75,10 @@ Page({
           if (res.confirm) {//这里是点击了确定以后
             interact.follow(user.id).then(
               (res) => {
-                if(res.code==201) {
+                if(res.data.msg!=null) {
                   user.has_follow = !user.has_follow
-                  this.setData({
+                  user.follower--
+                  that.setData({
                     user:user
                   })
                 }
@@ -89,9 +90,10 @@ Page({
     } else {
       interact.follow(user.id).then(
         (res) => {
-          if(res.code==201) {
+          if(res.data.msg!=null) {
             user.has_follow = !user.has_follow
-            this.setData({
+            user.follower++
+            that.setData({
               user:user
             })
           }

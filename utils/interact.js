@@ -1455,7 +1455,7 @@ module.exports.changeidentity = function (student_id,name,picture) {
 //todo
 module.exports.gettopic = function (labelId) {
   return new Promise((resolve, reject) => {
-    post_request(`users/verify/`,
+    post_request(`users/topics/get/`,
       {
         labelId:labelId,
         userId:app.loginData.userId,
@@ -1471,7 +1471,7 @@ module.exports.gettopic = function (labelId) {
 
 module.exports.deltopic = function (topicId) {
   return new Promise((resolve, reject) => {
-    get_request(`users/verify/${topicId}`,
+    get_request(`users/topics/delete/${topicId}`,
       {
         func: module.exports.deltopic,
         funcName: 'deltopic',
@@ -1483,7 +1483,7 @@ module.exports.deltopic = function (topicId) {
 
 module.exports.startopic = function (topicId) {
   return new Promise((resolve, reject) => {
-    post_request(`users/verify/`,
+    post_request(`users/topics/star/`,
       {
         userId:app.loginData.userId,
         topicId:topicId,
@@ -1497,12 +1497,13 @@ module.exports.startopic = function (topicId) {
   })
 }
 
-module.exports.submittopic = function (content) {
+module.exports.submittopic = function (content,labels) {
   return new Promise((resolve, reject) => {
-    post_request(`users/verify/`,
+    post_request(`users/topics/topic_add/`,
       {
         userId:app.loginData.userId,
-        content:content
+        content:content,
+        labels:labels,
       },
       {
         func: module.exports.submittopic,
@@ -1515,7 +1516,7 @@ module.exports.submittopic = function (content) {
 
 module.exports.getotheruser = function (otheruserid) {
   return new Promise((resolve, reject) => {
-    post_request(`users/verify/`,
+    post_request(`users/topics/check_others/`,
       {
         userId:app.loginData.userId,
         otheruserid:otheruserid
@@ -1531,10 +1532,11 @@ module.exports.getotheruser = function (otheruserid) {
 
 module.exports.follow = function (otheruserid) {
   return new Promise((resolve, reject) => {
-    post_request(`users/verify`,
+    post_request(`users/topics/person_follow/`,
       {
         userId:app.loginData.userId,
-        otheruserid:otheruserid
+        otheruserid:otheruserid,
+        tag:0
       },
       {
         func: module.exports.follow,
@@ -1547,7 +1549,7 @@ module.exports.follow = function (otheruserid) {
 
 module.exports.gettopicdetail = function (topicId) {
   return new Promise((resolve, reject) => {
-    get_request(`users/verify/${topicId}`,
+    get_request(`users/topics/detail/${topicId}`,
       {
         func: module.exports.gettopicdetail,
         funcName: 'gettopicdetail',
@@ -1559,7 +1561,7 @@ module.exports.gettopicdetail = function (topicId) {
 
 module.exports.getalllabels = function () {
   return new Promise((resolve, reject) => {
-    get_request(`users/verify`,
+    get_request(`users/topics/tags/`,
       {
         func: module.exports.getalllabels,
         funcName: 'getalllabels',
@@ -1569,11 +1571,12 @@ module.exports.getalllabels = function () {
   })
 }
 
-module.exports.sendcomment = function (content) {
+module.exports.sendcomment = function (content,topicId) {
   return new Promise((resolve, reject) => {
-    post_request(`users/verify/`,
+    post_request(`users/topics/comment/`,
       {
         userId:app.loginData.userId,
+        topicId:topicId,
         content:content
       },
       {
@@ -1587,10 +1590,22 @@ module.exports.sendcomment = function (content) {
 
 module.exports.delcomment = function (commentId) {
   return new Promise((resolve, reject) => {
-    get_request(`users/verify/${commentId}`,
+    get_request(`users/topics/comment/delete/${commentId}`,
       {
         func: module.exports.delcomment,
         funcName: 'delcomment',
+        reject: reject,
+        resolve: resolve
+    })
+  })
+}
+
+module.exports.getAllfriend = function (userId) {
+  return new Promise((resolve, reject) => {
+    get_request(`users/topics/follow_list/${userId}`,
+      {
+        func: module.exports.getAllfriend,
+        funcName: 'getAllfriend',
         reject: reject,
         resolve: resolve
     })

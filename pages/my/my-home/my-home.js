@@ -29,6 +29,10 @@ Page({
         url:'../my-notif/my-notif'
       },
       {
+        name:'关注好友',
+        url:'../my-friend/my-friend'
+      },
+      {
         name:'我的场地',
         url:'../my-site/my-site'
       },
@@ -92,6 +96,10 @@ Page({
             url:'../../schedule/schedule',
           },
           {
+            name:'关注好友',
+            url:'../my-friend/my-friend'
+          },
+          {
             name:'我的场地',
             url:'../my-site/my-site'
           },
@@ -130,6 +138,10 @@ Page({
             name:'通知列表',
             url:'../my-notif/my-notif',
             notice : app.unreadNotifList.length != 0
+          },
+          {
+            name:'关注好友',
+            url:'../my-friend/my-friend'
           },
           {
             name:'我的组织',

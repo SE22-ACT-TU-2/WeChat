@@ -1,0 +1,25 @@
+<!--pages/my/my-ground/my_ground.js.wxml-->
+<i-tabs current="{{ current }}"  color="#f759ab" bindchange="handleChange">
+    <i-tab key="tab1" title="关注我的"></i-tab>
+    <i-tab key="tab2" title="我的关注"></i-tab>
+    <i-tab key="tab3" title="互相关注"></i-tab>
+</i-tabs>
+<view wx:if="{{current == 'tab1'}}">
+    <follow-item wx:for="{{followers}}" wx:key="index" user="{{item.user}}"  data-index="{{index}}" data-id="{{item.user.id}}" bind:onchat="chat" />
+    <!-- nothing -->
+    <nothing wx:if="{{followers.length === 0}}" pic="../../images/pic_follow.png" tip="居然连一个关注者都没有？！" />
+</view>
+
+<view wx:if="{{current == 'tab2'}}">
+    <follow-item wx:for="{{followings}}" wx:key="index" user="{{item.user}}"  data-index="{{index}}" data-id="{{item.user.id}}" bind:onchat="chat" />
+    <!-- nothing -->
+    <nothing wx:if="{{followings.length === 0}}" pic="../../images/pic_follow.png" tip="居然连一个关注都没有？！" />
+</view>
+
+<view wx:if="{{current == 'tab3'}}">
+    <follow-item wx:for="{{change}}" wx:key="index" user="{{item.user}}" change="{{'true'}}" data-index="{{index}}" data-id="{{item.user.id}}" bind:onchat="chat" />
+    <!-- nothing -->
+    <nothing wx:if="{{change.length === 0}}" pic="../../images/pic_follow.png" tip="还没有好友！" />
+</view>
+
+

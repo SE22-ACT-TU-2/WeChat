@@ -17,5 +17,5 @@
 <!-- 评论编辑区 -->
 <view wx:if="{{topic}}" class="edit-item">
 	<input class="edit-input" placeholder="{{placeholder}}" maxlength="150" value="{{comment}}" focus="{{focus}}" confirm-hold confirm-type="send" bindinput="setComment" bindconfirm="onCommntBtnTap" />
-	<i-button shape="circle" size="small" color="blue" width="125" height="60" bind:click="onCommntBtnTap">评论</i-button>
+	<i-button i-class = "button" type="primary" shape="circle" size="small" width="125" height="60" bind:click="onCommntBtnTap">评论</i-button>
 </view>
