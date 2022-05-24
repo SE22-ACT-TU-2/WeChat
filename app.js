@@ -1,7 +1,7 @@
 const util = require('utils/util.js')
 const interact = require('utils/interact.js')
 const login = require('utils/login.js')
-// nothing to do
+
 // app.js
 App({
   version: "1.7.2",
@@ -23,6 +23,33 @@ App({
   },
   // allNotifList : [],
   unreadNotifList : [],
+  message : [],
+  unreadMessage :[
+    {
+        "id": 3,
+        "content": "hello1",
+        "is_read": false,
+        "created_time": "2022-05-18 04:24:03",
+        "from_user": 1,
+        "to_user": 0
+    },
+    {
+        "id": 4,
+        "content": "hello2",
+        "is_read": false,
+        "created_time": "2022-05-18 04:26:04",
+        "from_user": 0,
+        "to_user": 1
+    },
+    {
+      "id": 4,
+      "content": "hello3",
+      "is_read": false,
+      "created_time": "2022-05-18 04:26:04",
+      "from_user": 0,
+      "to_user": 2
+  },
+],
   // readNotifList: [],
   forumList : [
     {
@@ -79,7 +106,7 @@ App({
     latitude: 39.981891,
     longitude: 116.347256
   },
-
+  havelaunched:false,
   testShow() {
     return new Promise((resolve, reject) => {
       interact.show().then(
@@ -97,42 +124,113 @@ App({
     // 展示本地存储能力
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
-
     this.testShow()
 
     wx.setStorageSync('logs', logs)
-
-
-
-
-
-
+    //this.message = wx.getStorageSync('message') || []
     //接收数据
     var that = this;
-    wx.onSocketMessage(function(data) {
-      var r = JSON.parse(data.data)
-      console.log('服务器返回的数据: ', r);
-      that.unreadNotifList = r
-
-      if (that.unreadNotifList.length > 0) {
-        that.showRedDot()
+    wx.login({
+      success: e => {
+        if (this.loginData) {
+          login.login_({
+            code: e.code
+          }).then(() => {
+            this.havelaunched = true;
+            console.log("first connect websocket")
+            var notification = wx.connectSocket({
+              url: that.ws_werver + `link/${that.loginData.userId}/`,
+              timeout: 1000,
+            })
+            notification.onOpen(function(res){
+              console.log("notification第一次连接成功")
+            })
+            notification.onMessage(function(data) {
+              var r = JSON.parse(data.data)
+              console.log('服务器返回的数据: ', r);
+              that.unreadNotifList = r
+              if (that.unreadNotifList.length > 0) {
+                that.showRedDot()
+              }
+          })
+          }).then(() =>{
+             var message = wx.connectSocket({
+              url: that.ws_werver + `message/${that.loginData.userId}/`,
+              timeout: 1000,
+            })
+            message.onOpen(function(res){
+              console.log("message第一次连接成功")
+            })
+            this.ws = message
+            message.onMessage(function(data) {
+              var r = JSON.parse(data.data)
+              console.log('服务器返回的数据: ', r);
+              /*if(r.type == "ws_connected"){
+              that.unreadMessage = r.messages;
+              }*/
+              //that.message = that.message.concat(r.messages);
+              //wx.setStorageSync('message', that.message)
+          })
+            message.onClose(function(res){
+              console.log("第一次关闭socket")
+            })
+          }).catch((e) => {
+            console.error(funcInfo.funcName + ': 未登录')
+            funcInfo.reject({ err: funcInfo.funcName + ': 未登录', errMsg: '未登录' })
+          }).finally(function(){
+            
+          })
+        } else {                                                                
+          console.error(funcInfo.funcName + ': 未登录')
+          funcInfo.reject({ err: funcInfo.funcName + ': 未登录', errMsg: '未登录' })
+        }
       }
-  })
+    })
+    
   },
 
   onShow() {
     // when the app is hiden, the websocket link will disconnect. So we need connect again in Onshow
     var that = this;
+    
     if (this.firstShow) {
+      //console.log("第一次显示，无需连接websocket")
       this.firstShow = false
     } else if(this.loginData.userId != -1 && !this.socketOpen) {
-      wx.connectSocket({
+      console.log("尝试连接websocket")
+      var notification = wx.connectSocket({
         url: that.ws_werver + `link/${that.loginData.userId}/`,
         timeout: 1000,
       })
-    }
+      notification.onOpen(function(res){
+        console.log("notification再次连接成功")
+      })
+      notification.onMessage(function(data) {
+        var r = JSON.parse(data.data)
+        console.log('服务器返回的数据: ', r.message);
+        that.unreadNotifList = r
+        if (that.unreadNotifList.length > 0) {
+          that.showRedDot()
+        }
+    })
+  
+    var message = wx.connectSocket({
+      url: that.ws_werver + `message/${that.loginData.userId}/`,
+      timeout: 1000,
+    })
+    message.onOpen(function(res){
+      console.log("message再次连接成功")
+    })
+    message.onMessage(function(data) {
+      var r = JSON.parse(data.data)
+      console.log('服务器返回的数据: ', r);
+      that.unreadMessage = r;
+  })
+    message.onClose(function(res){
+      console.log("再次关闭socket")
+    })
+  }
   },
-
   showRedDot() {
     wx.showTabBarRedDot({
       index: 4,
@@ -145,12 +243,10 @@ App({
 
   globalLogin() {
     var that = this;
-    return new Promise( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       if (that.loginData.userId == -1) {
         login.newLogin().then(
           (resgit) => {
-            
-            
             that.loopSocket()
             resolve()
           }
@@ -159,19 +255,18 @@ App({
         resolve()
       }
     })
-    
   },
 
   loopSocket() {
     var that = this
     return new Promise((resolve, reject) => {
-      wx.connectSocket({
+      let notification = wx.connectSocket({
         url: that.ws_werver + `link/${that.loginData.userId}/`,
         timeout: 1000,
       })
       //连接成功
-      wx.onSocketOpen(function() {
-        console.log("websocket连接服务器成功")
+      notification.onSocketOpen(function() {
+        console.log("websocket连接服务器成功,notification")
         that.socketOpen = true
         wx.sendSocketMessage({
           data: 'This is a test from the client',
@@ -179,8 +274,8 @@ App({
       })
 
       //监听链接断开事件
-      wx.onSocketClose(function(res) {
-        console.log("websocket连接断开:" + res.reason)
+      notification.onSocketClose(function(res) {
+        console.log("notification连接断开:" + res.reason)
         that.socketOpen = false
       })
     })
@@ -204,5 +299,30 @@ App({
         }
       }
     })
+  },
+  sendMsg(msg){
+    console.log("sendmessage:" + msg)
+    //this.message.push(msg)
+    this.ws.send({
+      data : JSON.stringify(msg)
+    })
+  },
+  sendReadMsg(ids){
+    console.log("sendReadmessage:" + ids)
+    this.ws.send({
+      data: JSON.stringify({
+      "type": "receive_message",
+      "message_ids": ids
+    }),
+   })
+  },
+  sendRobotMsg(msg){
+    console.log("sendRobotmessage:" + msg)
+    this.ws.send({
+      data : JSON.stringify(msg)
+    })
+  },
+  onMessage(id){
+    
   }
 })

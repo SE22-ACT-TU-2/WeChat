@@ -1,14 +1,11 @@
 {
   "pages": [
-    "pages/my/my-home/my-home",
     "pages/site/site",
-    "pages/topic-detail/topic-detail",
-    "pages/topic-edit/topic-edit",
+    "pages/my/my-home/my-home",
     "pages/my/my-site/my-site",
     "pages/my/site-change/site-change",
     "pages/my/my-identity/my-identity",
     "pages/follows/follows",
-    "pages/index/index",
     "pages/schedule/schedule",
     "pages/sections/sections-home/sections-home",
     "pages/sections/act-list/act-list",
@@ -17,7 +14,6 @@
     "pages/sections/org-edit/org-edit",
     "pages/my/my-org/my-org",
     "pages/my/my-act/my-act",
-    "pages/visiting-card/visiting-card",
     "pages/my/my-money/my-money",
     "pages/my/new-act/new-act",
     "pages/my/new-org/new-org",
@@ -28,7 +24,8 @@
     "pages/sections/act-detail/new-comment/new-comment",
     "pages/sections/act-detail/participants/participants",
     "pages/sections/user-info/user-info",
-    "pages/my/my-notif/my-notif"
+    "pages/my/my-notif/my-notif",
+    "pages/my/message/message"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -45,8 +42,8 @@
       {
         "iconPath": "icon/home-outline.png",
         "selectedIconPath": "icon/home.png",
-        "pagePath": "pages/index/index",
-        "text": "首页"
+        "pagePath": "pages/site/site",
+        "text": "场地"
       },
       {
         "iconPath": "icon/planet-outline.png",
@@ -63,8 +60,8 @@
       {
         "iconPath": "icon/calendar-outline.png",
         "selectedIconPath": "icon/calendar.png",
-        "pagePath": "pages/site/site",
-        "text": "场地"
+        "pagePath": "pages/schedule/schedule",
+        "text": "日程"
       },
       {
         "iconPath": "icon/person-outline.png",
@@ -92,7 +89,6 @@
     "i-cell-group": "/lib/iview/dist/cell-group/index",
     "i-cell": "/lib/iview/dist/cell/index",
     "i-button": "/lib/iview/dist/button/index",
-    "i-tag" : "/lib/iview/dist/tag/index",
     "i-icon": "/lib/iview/dist/icon/index",
     "i-swipeout": "/lib/iview/dist/swipeout/index",
     "van-search": "lib/vant-weapp/search/index",
@@ -107,17 +103,7 @@
     "van-col": "lib/vant-weapp/col/index",
     "van-picker": "lib/vant-weapp/picker/index",
     "van-collapse": "lib/vant-weapp/collapse/index",
-    "van-collapse-item": "lib/vant-weapp/collapse-item/index",
-    "favor-bar": "./components/favor-bar/index",
-    "avatar": "./components/avatar/index",
-    "star-list": "./components/star-list/index",
-    "comment-item": "./components/comment-item/index",
-    "nothing": "./components/nothing/index",
-    "nickname": "./components/nickname/index",
-    "tags-pannel": "./components/tags-pannel/index",
-    "profile-card": "./components/profile-card/index",
-    "profile-topic": "./components/profile-topic/index",
-    "topic-item": "./components/topic-item/index"
+    "van-collapse-item": "lib/vant-weapp/collapse-item/index"
   },
   "plugins": {
     "chooseLocation": {
@@ -127,7 +113,7 @@
   },
   "permission": {
     "scope.userLocation": {
-    "desc": "你的位置信息将用于小程序定位"
+      "desc": "你的位置信息将用于小程序定位"
     }
   }
 }

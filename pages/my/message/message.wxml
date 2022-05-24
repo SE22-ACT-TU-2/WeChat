@@ -1,0 +1,207 @@
+<view>
+		<view class="content" bindtouchstart="hideDrawer">
+			<scroll-view class="msg-list {{popupLayerClass}}" scroll-y="true"
+				scroll-with-animation="{{scrollAnimation}}" scroll-top="{{scrollTop}}" scroll-into-view="{{scrollToView}}"
+				bindscrolltoupper="loadHistory" upper-threshold="50">
+				<!-- 加载历史数据waitingUI -->
+				<view class="loading">
+					<view class="spinner">
+						<view class="rect1"></view>
+						<view class="rect2"></view>
+						<view class="rect3"></view>
+						<view class="rect4"></view>
+						<view class="rect5"></view>
+					</view>
+				</view>
+				<view class="row" wx:for="{{msgList}}" id="{{'msg'+item.msg.id}}"  wx:key="item">
+					<!-- 系统消息 -->
+					<block wx:if="{{item.type=='system'}}">
+						<view class="system">
+							<!-- 文字消息 -->
+							<view wx:if="{{item.msg.type=='text'}}" class="text">
+								{{item.msg.content.text}}
+							</view>
+							<!-- 领取红包消息 -->
+							<view wx:if="{{item.msg.type=='redEnvelope'}}"  class="red-envelope">
+								<image src="/static/chat/red-envelope-chat.png"></image>
+								{{item.msg.content.text}}
+							</view>
+						</view>
+					</block>
+					<!-- 用户消息 -->
+					<block wx:if="{{item.type=='user'}}">
+						<!-- 自己发出的消息 -->
+						<view class="my" wx:if="{{item.msg.userinfo.uid==myuid}}">
+							<!-- 左-消息 -->
+							<view class="left">
+								<!-- 文字消息 -->
+								<view wx:if="{{item.msg.type=='text'}}" class="bubble">
+									<rich-text nodes="{{item.msg.content.text}}"></rich-text>
+								</view>
+								<!-- 语言消息 -->
+								<view wx:if="{{item.msg.type=='voice'}}" class="bubble voice {{playMsgid == item.msg.id?'play':''}}" data-msg="{{item.msg}}" bindtap="playVoice">
+									<view class="length">{{item.msg.content.length}}</view>
+									<view class="icon my-voice"></view>
+								</view>
+								<!-- 图片消息 -->
+								<view wx:if="{{item.msg.type=='img'}}" class="bubble img" data-msg="{{item.msg}}" bindtap="showPic">
+									<image src="{{item.msg.content.url}}"
+										style="width:{{item.msg.content.w}}px;height:{{item.msg.content.h}}px;">
+									</image>
+								</view>
+								<!-- 红包 -->
+								<view wx:if="{{item.msg.type=='redEnvelope'}}" class="bubble red-envelope" data-index="{{index}}" data-msg="{{item.msg}}"
+									bindtap="openRedEnvelope">
+									<image src="/static/chat/red-envelope.png"></image>
+									<view class="tis">
+										<!-- 点击开红包 -->
+									</view>
+									<view class="blessing">
+										{{item.msg.content.blessing}}
+									</view>
+								</view>
+
+							</view>
+							<!-- 右-头像 -->
+							<view class="right">
+								<image src="{{item.msg.userinfo.face}}"></image>
+							</view>
+						</view>
+						<!-- 别人发出的消息 -->
+						<view class="other" wx:if="{{item.msg.userinfo.uid!=myuid}}">
+							<!-- 左-头像 -->
+							<view class="left">
+								<image src="{{item.msg.userinfo.face}}"></image>
+							</view>
+							<!-- 右-用户名称-时间-消息 -->
+							<view class="right">
+								<view class="username">
+									<view class="name">{{item.msg.userinfo.username}}</view>
+									<view class="time">{{item.msg.time}}</view>
+								</view>
+								<!-- 文字消息 -->
+								<view wx:if="{{item.msg.type=='text'}}" class="bubble">
+									<rich-text nodes="{{item.msg.content.text}}"></rich-text>
+								</view>
+								<!-- 语音消息 -->
+								<view wx:if="{{item.msg.type=='voice'}}" data-msg="{{item.msg}}" class="bubble voice {{playMsgid == item.msg.id?'play':''}}" bindtap="playVoice">
+									<view class="icon other-voice"></view>
+									<view class="length">{{item.msg.content.length}}</view>
+								</view>
+								<!-- 图片消息 -->
+								<view wx:if="{{item.msg.type=='img'}}" data-msg="{{item.msg}}" class="bubble img" bindtap="showPic">
+									<image src="{{item.msg.content.url}}"
+										   style="width:{{item.msg.content.w}}px;height:{{item.msg.content.h}}px;">
+									</image>
+								</view>
+								<!-- 红包 -->
+								<view wx:if="{{item.msg.type=='redEnvelope'}}" class="bubble red-envelope" data-msg="{{item.msg}}" data-index="{{index}}"
+									bindtap="openRedEnvelope">
+									<image src="/static/chat/red-envelope.png"></image>
+									<view class="tis">
+										<!-- 点击开红包 -->
+									</view>
+									<view class="blessing">
+										{{item.msg.content.blessing}}
+									</view>
+								</view>
+							</view>
+						</view>
+					</block>
+				</view>
+			</scroll-view>
+		</view>
+		<!-- 抽屉栏 -->
+		<view class="popup-layer {{popupLayerClass}}"  catchtouchmove="discard">
+			<!-- 表情 -->
+			<!--
+			<swiper class="emoji-swiper {{hideEmoji?'hidden':''}}" indicator-dots="true" duration="150">
+				<swiper-item wx:for="{{emojiList}}" wx:for-item="page" wx:key="{{page}}">
+					<view wx:for="{{page}}"  wx:for-item="em" wx:key="{{em}}" data-em="{{em}}" bindtap="addEmoji">
+						<image mode="widthFix" src="https://zhoukaiwen.com/img/icon/emojj1/{{em.url}}"></image>
+					</view>
+				</swiper-item>
+			</swiper>
+			-->
+			<!-- 更多功能 相册-拍照-红包 -->
+			<!--
+			<view class="more-layer {{hidden?'hideMore':''}}">
+				<view class="list">
+					<view class="box" bindtap="chooseImage">
+						<view class="icon tupian2"></view>
+					</view>
+					<view class="box" bindtap="camera">
+						<view class="icon paizhao"></view>
+					</view>
+					<view class="box" bindtap="handRedEnvelopes">
+						<view class="icon hongbao"></view>
+					</view>
+				</view>
+			</view>
+			-->
+		</view>
+		<!-- 底部输入栏 -->
+		<view class="input-box cu-bar tabbar {{popupLayerClass}}" catchtouchmove="discard">
+		 <!--
+			<view class="voice">
+				<view class="icon {{isVoice?'jianpan':'yuyin'}}" bindtap="switchVoice"></view>
+			</view>
+			-->
+			<view class="textbox">
+				<view class="voice-mode {{isVoice?'':'hidden'}}{{recording?'recording':''}}"
+					bindtouchstart="voiceBegin" catchtouchmove="voiceIng" bindtouchend="voiceEnd"
+					bindtouchcancel="voiceCancel">{{voiceTis}}</view>
+				<view class="text-mode {{isVoice?'hidden':''}}">
+					<view class="box">
+						<textarea auto-height="true" bindinput="inputtextMsg" value="{{textMsg}}" bindfocus="textareaFocus" />
+					</view>
+					<!--
+					<view class="em" bindtap="chooseEmoji">
+						<view class="icon biaoqing"></view>
+					</view>
+					-->
+				</view>
+			</view>
+			<!--
+			<view class="more" bindtap="showMore">
+				<view class="icon add"></view>
+			</view>
+			-->
+			<view class="send {{isVoice?'hidden':''}}" bindtap="sendText">
+				<view class="btn">发送</view>
+			</view>
+		</view>
+		<!-- 录音UI效果 -->
+		<view class="record {{recording?'':'hidden'}}">
+			<view class="ing {{willStop?'hidden':''}}">
+				<view class="icon luyin2"></view>
+			</view>
+			<view class="cancel {{willStop?'':'hidden'}}">
+				<view class="icon chehui"></view>
+			</view>
+			<view class="tis {{willStop?'change':''}}">{{recordTis}}</view>
+		</view>
+		<!-- 红包弹窗 -->
+		<view class="windows {{windowsState}}">
+			<!-- 遮罩层 -->
+			<view class="mask" catch:touchmove="discard" bindtap="closeRedEnvelope"></view>
+			<view class="layer" catch:touchmove="discard">
+				<view class="open-redenvelope">
+					<view class="top">
+						<view class="close-btn">
+							<view class="icon close" bindtap="closeRedEnvelope"></view>
+						</view>
+						<image src="https://zhoukaiwen.com/img/qdpz/face/face_1.jpg"></image>
+					</view>
+					<view class="from">来自{{redenvelopeData.from}}</view>
+					<view class="blessing">{{redenvelopeData.blessing}}</view>
+					<view class="money">{{redenvelopeData.money}}</view>
+					<view class="showDetails" data-rid="{{redenvelopeData.rid}}" bindtap="toDetails">
+						查看领取详情 <view class="icon to"></view>
+					</view>
+				</view>
+			</view>
+
+		</view>
+	</view>
+

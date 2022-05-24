@@ -131,6 +131,10 @@ Page({
             url:'../my-notif/my-notif',
             notice : app.unreadNotifList.length != 0
           },
+	  {
+            name:'我的聊天',
+            url:'../message/message'
+          },
           {
             name:'我的组织',
             url:'../my-org/my-org'
