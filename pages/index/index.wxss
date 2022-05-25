@@ -171,3 +171,7 @@
   border-radius: 50%;
   background: #7ab7fc;
 }
+
+.test{
+  text-align: center;
+}

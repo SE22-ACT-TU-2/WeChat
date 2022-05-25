@@ -17,7 +17,7 @@
 </view>
 
 <view wx:if="{{current == 'tab3'}}">
-    <follow-item wx:for="{{change}}" wx:key="index" user="{{item.user}}" change="{{'true'}}" data-index="{{index}}" data-id="{{item.user.id}}" bind:onchat="chat" />
+    <follow-item wx:for="{{change}}" wx:key="index" user="{{item.user}}" change="{{'true'}}" data-index="{{index}}" data-user="{{item.user}}" bind:onchat="chat" />
     <!-- nothing -->
     <nothing wx:if="{{change.length === 0}}" pic="../../images/pic_follow.png" tip="还没有好友！" />
 </view>

@@ -31,6 +31,7 @@ Page({
         ],
         labelId:0,
         labels:[{id:0,name:"全部"},{id:1,name:"你们"}],
+        user_list:[{id:1,avatar:app.loginData.avatar,nickName:"yes"}]
     },
 
     onLoad: function (options) {
@@ -70,9 +71,10 @@ Page({
                     var locations = []
                     var acts = res.data.acts
                     var orgs = res.data.orgs
-                    
+                    var users = res.data.users
                     this.setData({
                       org_list : orgs.length > 10 ? orgs.slice(0,10) : orgs,
+                      user_list:users.length>10?users.slice(0,10):users,
                     })
                     for (var i = 0; i < Math.min(10, acts.length); i++) {
                         var v = acts[i]

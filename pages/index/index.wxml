@@ -64,6 +64,23 @@
     </scroll-view>
   </view>
 
+  <view class="org-wrap">
+    <view class="header">
+        <text class="txt">活跃用户</text>
+        <!-- <view class="right" id="0" bindtap="toFollowOrg">
+          <text class="all">查看全部</text>
+          <image class="arrow" src="/icon/rightArrow.png"></image>
+        </view> -->
+    </view>
+    <view class="org-list">
+      <view class="org-item" wx:for="{{user_list}}" hover-class="weui-cell_active">
+        <avatar src="{{item.avatar}}" user-id="{{item.id}}" size="80" />
+        <view class="test">
+        <nickname nickname="{{item.nickName}}" user-id="{{item.id}}" size="35"/>
+        </view>
+      </view>
+    </view>
+  </view>
   
 </view>
 

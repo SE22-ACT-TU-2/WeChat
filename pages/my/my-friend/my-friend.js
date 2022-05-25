@@ -53,10 +53,10 @@ Page({
 
     chat(e) {
       console.log(e)
-      const id = e.currentTarget.dataset.id
+      const user = e.currentTarget.dataset.user
       console.log(id)
       wx.navigateTo({
-        url: '../chat/chat?userId='+id,
+        url: '../message/message?user='+user,
       })
     },
 
