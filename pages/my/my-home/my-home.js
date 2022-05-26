@@ -139,10 +139,6 @@ Page({
             url:'../my-notif/my-notif',
             notice : app.unreadNotifList.length != 0
           },
-	  {
-            name:'我的聊天',
-            url:'../message/message'
-          },
           {
             name:'关注好友',
             url:'../my-friend/my-friend'

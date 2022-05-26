@@ -448,12 +448,12 @@ Page({
     },
 
     onLoad(options) {
-        /*
+        
         this.setData({
             friendid:options.user.id,
             friendName:options.user.nickName,
             friendAvatar:options.user.avatar
-        })*/
+        })
         var nowDate = new Date();
         var that = this;
         this.getMsgList();
@@ -474,8 +474,8 @@ Page({
                         time: r.message.created_time,
                         userinfo: {
                             uid: that.data.friendid,
-                            username: "alevaF",
-                            face: "https://zhoukaiwen.com/img/qdpz/face/face_2.jpg"
+                            username: that.data.friendName,
+                            face: that.data.friendAvatar
                         },
                         content:{
                             text: r.message.content
@@ -670,8 +670,8 @@ Page({
                         time: unreadmsg[i].created_time,
                         userinfo: {
                             uid: this.data.friendid,
-                            username: "alevaF",
-                            face: "https://zhoukaiwen.com/img/qdpz/face/face_2.jpg"
+                            username: this.data.friendName,
+                            face: this.data.friendAvatar
                         },
                         content:{
                             text: unreadmsg[i].content
