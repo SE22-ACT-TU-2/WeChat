@@ -1611,3 +1611,16 @@ module.exports.getAllfriend = function (userId) {
     })
   })
 }
+
+
+module.exports.getusers = function () {
+  return new Promise((resolve, reject) => {
+    get_request(`users/recommend/`,
+      {
+        func: module.exports.getusers,
+        funcName: 'getusers',
+        reject: reject,
+        resolve: resolve
+    })
+  })
+}

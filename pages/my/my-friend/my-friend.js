@@ -54,9 +54,9 @@ Page({
     chat(e) {
       console.log(e)
       const user = e.currentTarget.dataset.user
-      console.log(id)
+      console.log(user)
       wx.navigateTo({
-        url: '../message/message?user='+user,
+        url: '../message/message?id='+user.id+'&nickName='+user.nickName+'&avatar='+user.avatar,
       })
     },
 

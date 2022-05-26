@@ -71,10 +71,10 @@ Page({
                     var locations = []
                     var acts = res.data.acts
                     var orgs = res.data.orgs
-                    var users = res.data.users
+                    //var users = res.data.users
                     this.setData({
                       org_list : orgs.length > 10 ? orgs.slice(0,10) : orgs,
-                      user_list:users.length>10?users.slice(0,10):users,
+                      //user_list:users.length>10?users.slice(0,10):users,
                     })
                     for (var i = 0; i < Math.min(10, acts.length); i++) {
                         var v = acts[i]
@@ -116,7 +116,15 @@ Page({
                   this.init(0)
                 }
               )
-              
+              interact.getusers().then(
+                (res)=> {
+                  console.log(res)
+                  var users = res.data
+                  this.setData({
+                    user_list:users.length>10?users.slice(0,10):users,
+                  })
+                }
+              )
               
               
 

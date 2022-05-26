@@ -74,9 +74,11 @@
     </view>
     <view class="org-list">
       <view class="org-item" wx:for="{{user_list}}" hover-class="weui-cell_active">
-        <avatar src="{{item.avatar}}" user-id="{{item.id}}" size="80" />
         <view class="test">
-        <nickname nickname="{{item.nickName}}" user-id="{{item.id}}" size="35"/>
+        <avatar src="{{item.avatar}}" user-id="{{item.id}}" size="75" />
+        </view>
+        <view class="test">
+        <nickname nickname="{{item.nickName}}" user-id="{{item.id}}" size="30"/>
         </view>
       </view>
     </view>
