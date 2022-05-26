@@ -453,6 +453,7 @@ Page({
             friendid:options.user.id,
             friendName:options.user.nickName,
             friendAvatar:options.user.avatar,
+            myuid:app.loginData.userId
         })
         var nowDate = new Date();
         var that = this;
