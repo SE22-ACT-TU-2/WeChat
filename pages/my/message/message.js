@@ -448,11 +448,11 @@ Page({
     },
 
     onLoad(options) {
-        
+        console.log(options)
         this.setData({
-            friendid:options.user.id,
-            friendName:options.user.nickName,
-            friendAvatar:options.user.avatar
+            friendid:options.id,
+            friendName:options.nickName,
+            friendAvatar:options.avatar
         })
         var nowDate = new Date();
         var that = this;

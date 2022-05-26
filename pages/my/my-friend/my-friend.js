@@ -56,7 +56,7 @@ Page({
       const user = e.currentTarget.dataset.user
       console.log(user)
       wx.navigateTo({
-        url: '../message/message?user='+user,
+        url: '../message/message?id='+user.id+'&nickName='+user.nickName+'&avatar='+user.avatar,
       })
     },
 
