@@ -450,9 +450,9 @@ Page({
     onLoad(options) {
         console.log(options)
         this.setData({
-            friendid:options.user.id,
-            friendName:options.user.nickName,
-            friendAvatar:options.user.avatar,
+            friendid:options.id,
+            friendName:options.nickName,
+            friendAvatar:options.avatar,
             myuid:app.loginData.userId
         })
         var nowDate = new Date();
@@ -1041,7 +1041,10 @@ Page({
         //实际应用中，此处应该提交长连接，模板仅做本地处理。
         var nowDate = new Date();
         let self = this;
-        let lastid = self.data.msgList[self.data.msgList.length - 1].msg.id;
+        var lastid = 0;
+        if(self.data.msgList.length != 0){
+            lastid = self.data.msgList[self.data.msgList.length - 1].msg.id;
+        }
         lastid++;
         let msg = {
             type: 'user',
@@ -1050,7 +1053,7 @@ Page({
                 time: nowDate.getHours() + ":" + nowDate.getMinutes(),
                 type: type,
                 userinfo: {
-                    uid: 0,
+                    uid: self.data.myuid,
                     username: app.loginData.nickName,
                     face: app.loginData.avatar
                 },
