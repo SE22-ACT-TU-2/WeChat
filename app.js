@@ -165,9 +165,9 @@ App({
             message.onMessage(function(data) {
               var r = JSON.parse(data.data)
               console.log('服务器返回的数据: ', r);
-              /*if(r.type == "ws_connected"){
+              if(r.type == "ws_connected"){
               that.unreadMessage = r.messages;
-              }*/
+              }
               //that.message = that.message.concat(r.messages);
               //wx.setStorageSync('message', that.message)
           })
@@ -224,7 +224,9 @@ App({
     message.onMessage(function(data) {
       var r = JSON.parse(data.data)
       console.log('服务器返回的数据: ', r);
-      that.unreadMessage = r;
+      if(r.type == "ws_connected"){
+        that.unreadMessage = r.messages;
+        }
   })
     message.onClose(function(res){
       console.log("再次关闭socket")
@@ -301,18 +303,18 @@ App({
     })
   },
   sendMsg(msg){
-    console.log("sendmessage:" + msg)
+    console.log(msg)
     //this.message.push(msg)
     this.ws.send({
       data : JSON.stringify(msg)
     })
   },
-  sendReadMsg(ids){
-    console.log("sendReadmessage:" + ids)
+  sendReadMsg(id){
+    console.log("sendReadmessage:" + id)
     this.ws.send({
       data: JSON.stringify({
       "type": "receive_message",
-      "message_ids": ids
+      "send_user_id": id
     }),
    })
   },

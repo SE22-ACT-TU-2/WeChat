@@ -455,6 +455,7 @@ Page({
             friendAvatar:options.avatar,
             myuid:app.loginData.userId
         })
+        app.sendReadMsg(this.data.friendid);
         var nowDate = new Date();
         var that = this;
         this.getMsgList();
@@ -639,9 +640,8 @@ Page({
         let self = this;
         var unreadmsg = app.unreadMessage;
         var messages = [];
-        var ids = [];
         for(let i = 0; i < unreadmsg.length;i++){
-
+            console.log(self.data.friendid)
             if(unreadmsg[i].from_user == this.data.myuid && unreadmsg[i].to_user == this.data.friendid){
                 let message = {
                     type: "user",
@@ -662,7 +662,6 @@ Page({
                 messages.push(message);
             }
             else if(unreadmsg[i].from_user == this.data.friendid && unreadmsg[i].to_user == this.data.myuid ){
-                ids.push(unreadmsg[i].id)
                 let message = {
                     type: "user",
                     msg:{
@@ -682,7 +681,6 @@ Page({
                 messages.push(message);
             }
         }
-        app.sendReadMsg(ids)
         self.setData({
             msgList: messages,
             scrollTop:9999,

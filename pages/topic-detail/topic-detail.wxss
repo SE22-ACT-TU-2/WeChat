@@ -29,3 +29,7 @@
 .button {
   text-align: center;
 }
+
+.test {
+  height: 60px;
+}

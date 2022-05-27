@@ -136,9 +136,10 @@ Page({
           name : that.data.content2,
         },
         success(res) {
-          console.log(that.data.content2)
+          var data = JSON.parse(res.data);
+          console.log(res)
           wx.showToast({
-            title : res.data.msg,
+            title : data.msg,
             icon : "none"
           })
         }

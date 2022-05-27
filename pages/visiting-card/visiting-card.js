@@ -18,9 +18,15 @@ Page({
     
     interact.getotheruser(options.userId).then(
       (res) => {
+        var topics = res.data.topics
+        for(var i =0;i<topics.length;i++) {
+          var v = topics[i]
+          //v.create_time = v.create_time.split(".")[0].replace("T", " ")
+          v.create_time=util.getRelativeTime(v.create_time)
+        }
         this.setData({
           user:res.data.user,
-          topics:res.data.topics,
+          topics:topics,
         })
       }
     )

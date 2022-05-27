@@ -12,6 +12,7 @@
 	<view wx:if="{{topic && comments.length > 0}}">
 		<comment-item wx:for="{{comments}}" comment="{{item}}" wx:key="index" id="comment_{{index}}" has-border="{{index !== comments.length - 1}}" isOwner="{{userId === item.user.id}}" bind:deleteTap="deleteComment" />
 	</view>
+	<view class="test"></view>
 </scroll-view>
 
 <!-- 评论编辑区 -->
