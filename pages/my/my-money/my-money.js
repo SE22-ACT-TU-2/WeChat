@@ -92,6 +92,9 @@ Page({
             title: res.data.msg,
             icon : "none",
           })
+          this.setData({
+            content:""
+          })
           that.onShow()
         }
       )

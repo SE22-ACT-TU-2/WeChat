@@ -202,7 +202,13 @@ Page({
         (res) => {
           wx.showToast({
             title: res.data.msg,
+            icon:"none"
+          }).then(
+            wx.navigateBack({
+            delta: 0,
           })
+          )
+          
         }
       )
     },

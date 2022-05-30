@@ -543,6 +543,9 @@ Page({
     resetlist() {
       this.setData({
         num : 1,
+        identity: "请选择预约者身份",
+        file:"",
+        same:false,
         list: [
           {
             id : "0",
