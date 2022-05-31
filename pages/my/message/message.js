@@ -528,7 +528,7 @@ Page({
                 this.recordEnd(e);
             });
         });
-
+/*
         let joinGroup = webIm.joinGroup({ groupID: '@TGS#aYDESY2HY', type:TIM.TYPES.GRP_AVCHATROOM});
             joinGroup.then(function(imResponse) {
                 console.log(imResponse)
@@ -549,7 +549,7 @@ Page({
             }).catch(function(imError){
             console.warn('joinGroup error:', imError); // 申请加群失败的相关信息
             });
-
+*/
             setTimeout(()=>{
                 let getGroupMemberList = webIm.getGroupMemberList({ groupID: '@TGS#aYDESY2HY',count: 30, offset:0});
                     getGroupMemberList.then(function(imResponse) {

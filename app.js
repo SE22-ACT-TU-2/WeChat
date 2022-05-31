@@ -168,10 +168,19 @@ App({
               console.log('服务器返回的数据: ', r);
               if(r.type == "ws_connected"){
               that.unreadMessage = r.messages;
-              that.allMessage = that.allMessage.concat(r.messages);
+              let unreadMsg = that.unreadMessage;
+              let allMsg = that.allMessage;
+              for(let i = 0;i < unreadMsg.length;i++){
+                if(!allMsg.some(item =>{item.id == unreadMsg[i].id})){
+                  console.log('加入一条未读消息' + i)
+                  that.allMessage.push(unreadMsg[i])
+                }
+              }
+              //that.allMessage = that.allMessage.concat(r.messages);
               }
               else if(r.type == "new_message"){
-                that.message.push(r.message);
+                that.allMessage.push(r.message);
+                wx.setStorage('message', that.allMessage)
                 console.log('收到一条新消息')
               }
               //that.message = that.message.concat(r.messages);
@@ -233,10 +242,18 @@ App({
       console.log('服务器返回的数据: ', r);
       if(r.type == "ws_connected"){
         that.unreadMessage = r.messages;
-        that.allMessage = that.allMessage.concat(r.messages);
+        let unreadMsg = that.unreadMessage;
+        let allMsg = that.allMsg;
+        for(let i = 0;i < unreadMsg.length;i++){
+          if(!allMsg.some(item =>{item.id == unreadMsg[i].id})){
+            console.log('加入一条未读消息'+i)
+            that.allMessage.push(unreadMsg[i])
+          }
+        }
+        //that.allMessage = that.allMessage.concat(r.messages);
         }
         else if(r.type == "new_message"){
-          that.message.push(r.message);
+          that.allMessage.push(r.message);
           console.log('收到一条新消息')
         }
   })
