@@ -22,9 +22,9 @@ App({
 
   },
   // allNotifList : [],
-  unreadNotifList : [],
-  message : [],
-  unreadMessage :[
+  unreadNotifList : [], 
+  allMessage : [],
+  unreadMessage :[  //后端要发来的未读消息
     {
         "id": 3,
         "content": "hello1",
@@ -125,9 +125,10 @@ App({
     const logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     this.testShow()
-
     wx.setStorageSync('logs', logs)
-    //this.message = wx.getStorageSync('message') || []
+    this.allMessage = wx.getStorageSync('message') || []
+    console.log("历史消息")
+    console.log(this.allMessage)
     //接收数据
     var that = this;
     wx.login({
@@ -167,11 +168,17 @@ App({
               console.log('服务器返回的数据: ', r);
               if(r.type == "ws_connected"){
               that.unreadMessage = r.messages;
+              that.allMessage = that.allMessage.concat(r.messages);
+              }
+              else if(r.type == "new_message"){
+                that.message.push(r.message);
+                console.log('收到一条新消息')
               }
               //that.message = that.message.concat(r.messages);
               //wx.setStorageSync('message', that.message)
           })
             message.onClose(function(res){
+              wx.setStorageSync('message', that.allMessage);
               console.log("第一次关闭socket")
             })
           }).catch((e) => {
@@ -226,9 +233,15 @@ App({
       console.log('服务器返回的数据: ', r);
       if(r.type == "ws_connected"){
         that.unreadMessage = r.messages;
+        that.allMessage = that.allMessage.concat(r.messages);
+        }
+        else if(r.type == "new_message"){
+          that.message.push(r.message);
+          console.log('收到一条新消息')
         }
   })
     message.onClose(function(res){
+      wx.setStorageSync('message', that.allMessage)
       console.log("再次关闭socket")
     })
   }
@@ -314,7 +327,7 @@ App({
     this.ws.send({
       data: JSON.stringify({
       "type": "receive_message",
-      "send_user_id": id
+      "user_id": id
     }),
    })
   },

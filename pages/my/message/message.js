@@ -484,6 +484,7 @@ Page({
                         }
                     }
                 }
+                app.sendReadMsg(that.data.friendid);
                 that.screenMsg(message)
             }
             else if(r.type == "chat_robot_reply"){
@@ -638,7 +639,7 @@ Page({
     // 消息列表
     getMsgList() {
         let self = this;
-        var unreadmsg = app.unreadMessage;
+        var unreadmsg = app.allMessage; //用来获取所有要显示的信息
         var messages = [];
         for(let i = 0; i < unreadmsg.length;i++){
             console.log(self.data.friendid)
@@ -1057,16 +1058,24 @@ Page({
                 },
                 content: content
             }
-        }
+        } //要显示的消息格式
         let message = {
             "type": "send_message",
             "to_user": this.data.friendid,
             "message": content.text
+        } //发往后端的消息格式
+        let history_message = {
+            "id": 999,
+            "content": content.text,
+            "is_read": false,
+            "created_time": nowDate.getHours() + ":" + nowDate.getMinutes(),
+            "from_user": this.data.myuid,
+            "to_user": this.data.friendid
         }
         app.sendMsg(message);
         // 发送消息
         self.screenMsg(msg);
-        // 定时器模拟对方回复,三秒
+        app.allMessage.push(history_message);
         /*
         setTimeout(() => {
             lastid = self.data.msgList[self.data.msgList.length - 1].msg.id;
