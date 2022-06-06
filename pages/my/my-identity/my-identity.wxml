@@ -45,8 +45,21 @@
     bind:change="contactHandler2"
   />
 </van-cell-group>
-<view class = "btn"> 
-<button class = "upload" bindtap="getPhoto" type= "primary" > 上传图片</button>
+<view class="wrap">
+<view class="img-wrap">
+  <view class="txt">上传图片</view>
+  <view class="imglist">
+    <view class="item" wx:for="{{imgs}}" wx:key="item">
+      <image src="{{item}}" alt=""></image>
+      <view class='delete' bindtap='deleteImg' data-index="{{index}}">
+        <image src="../../../images/error.png"></image>
+      </view>
+    </view>
+    <view class="last-item" wx:if="{{imgs.length >= 1 ? false : true}}" bindtap="bindUpload">
+      <text class="sign">+</text>
+    </view>
+  </view>
+</view>
 <button class= "commit" bindtap="upload" type="primary" >申请认证</button>
 </view>
 

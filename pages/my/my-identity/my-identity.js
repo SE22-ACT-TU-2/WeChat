@@ -12,6 +12,7 @@ Page({
       content1: "",
       content2: "",
       tempFilePaths:[],
+      imgs:[],
     },
 
     /**
@@ -93,7 +94,7 @@ Page({
       })
     },
     
-    getPhoto : function() {
+    bindUpload : function() {
       var that = this
       wx.chooseImage({
         count: 1,
@@ -102,10 +103,32 @@ Page({
         success : (res) =>{
         // tempFilePath可以作为img标签的src属性显示图片
         that.setData({
-          tempFilePaths : res.tempFilePaths
+          tempFilePaths : res.tempFilePaths,
+          imgs:res.tempFilePaths
         })
         console.log(that.data.tempFilePaths)
       }
+      })
+    },
+    
+    // 删除图片
+    deleteImg: function (e) {
+      var that = this
+      wx.showModal({
+        title: "提示",
+        content: "是否删除",
+        success: function (res) {
+          if (res.confirm) {
+            for (var i = 0; i < that.data.imgs.length; i++) {
+              if (i == e.currentTarget.dataset.index) that.data.imgs.splice(i, 1)
+            }
+            that.setData({
+              imgs: that.data.imgs
+            })
+          } else if (res.cancel) {
+            console.log("用户点击取消")
+          }
+        }
       })
     },
 
@@ -113,36 +136,54 @@ Page({
       const path = this.data.tempFilePaths[0]
       var that = this
       console.log(this.data.content1)
-      wx.uploadFile({
-        // filePath: path,
-        // name: 'picture',
-        // url: App.server+"users/verify/",
-        // header: {
-        //   "Content-Type": "multipart/form-data",
-        //   'accept': 'application/json',
-        //   },
-        url:App.server+"users/verify/",
-        filePath: path,
-        name: 'picture',
-        method :'POST',
-        header:{
-          'content-type' : 'multipart/form-data',
-          'Authorization': 'Bearer ' + getApp().loginData.token
-        },
-        /////
-        formData:{
-          user_id : App.loginData.userId,
-          student_id : that.data.content1,
-          name : that.data.content2,
-        },
-        success(res) {
-          var data = JSON.parse(res.data);
-          console.log(res)
-          wx.showToast({
-            title : data.msg,
-            icon : "none"
-          })
-        }
-      })
+      if(this.data.content1=="") {
+        wx.showToast({
+          title: '未输入学号',
+          icon : "none"
+        })
+      } else if(this.data.content2=="") {
+        wx.showToast({
+          title: '未输入姓名',
+          icon : "none"
+        })
+      } else if(path==null) {
+        wx.showToast({
+          title: '未选择图片',
+          icon : "none"
+        })
+      } else {
+        wx.uploadFile({
+          // filePath: path,
+          // name: 'picture',
+          // url: App.server+"users/verify/",
+          // header: {
+          //   "Content-Type": "multipart/form-data",
+          //   'accept': 'application/json',
+          //   },
+          url:App.server+"users/verify/",
+          filePath: path,
+          name: 'picture',
+          method :'POST',
+          header:{
+            'content-type' : 'multipart/form-data',
+            'Authorization': 'Bearer ' + getApp().loginData.token
+          },
+          /////
+          formData:{
+            user_id : App.loginData.userId,
+            student_id : that.data.content1,
+            name : that.data.content2,
+          },
+          success(res) {
+            var data = JSON.parse(res.data);
+            console.log(res)
+            wx.showToast({
+              title : data.msg,
+              icon : "none"
+            })
+          }
+        })
+      }
+      
     }
 })
