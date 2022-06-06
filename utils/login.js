@@ -86,7 +86,7 @@ module.exports.catchUnLogin = function(funcInfo) {
     wx.login({
       success: e => {
         if (app.loginData) {
-          login_({
+          module.exports.login_({
             code: e.code
           }).then(() => {
             //记录重复尝试次数
@@ -290,7 +290,7 @@ module.exports.newLogin = function() {
     wx.login({
       success: res => {
         if (res.code) {
-          login_({
+          module.exports.login_({
             code: res.code
           }).then(
             res => {

@@ -126,13 +126,15 @@ App({
     logs.unshift(Date.now())
     this.testShow()
     wx.setStorageSync('logs', logs)
-    this.allMessage = wx.getStorageSync('message') || []
-    console.log("历史消息")
-    console.log(this.allMessage)
+    
+    
     //接收数据
     var that = this;
     wx.login({
       success: e => {
+        that.allMessage = wx.getStorageSync('message') || []
+        console.log("历史消息")
+        console.log(that.allMessage)
         if (this.loginData) {
           login.login_({
             code: e.code
@@ -176,13 +178,17 @@ App({
                   that.allMessage.push(unreadMsg[i])
                 }
               }
+              wx.setStorageSync('message', that.allMessage)
               //that.allMessage = that.allMessage.concat(r.messages);
               }
               else if(r.type == "new_message"){
                 that.allMessage.push(r.message);
-                wx.setStorage('message', that.allMessage)
+                wx.setStorageSync('message', that.allMessage)
                 console.log('收到一条新消息')
               }
+              var pages = getCurrentPages();
+              var currentPage = pages[pages.length - 1]; //当前页面
+              if (currentPage.onMessage)﻿ currentPage.onMessage(data);
               //that.message = that.message.concat(r.messages);
               //wx.setStorageSync('message', that.message)
           })
@@ -250,12 +256,17 @@ App({
             that.allMessage.push(unreadMsg[i])
           }
         }
+        wx.setStorageSync('message', that.allMessage)
         //that.allMessage = that.allMessage.concat(r.messages);
         }
         else if(r.type == "new_message"){
           that.allMessage.push(r.message);
           console.log('收到一条新消息')
+          wx.setStorageSync('message', that.allMessage)
         }
+        var pages = getCurrentPages();
+        var currentPage = pages[pages.length - 1]; //当前页面
+        if (currentPage.onMessage)﻿ currentPage.onMessage(data);
   })
     message.onClose(function(res){
       wx.setStorageSync('message', that.allMessage)

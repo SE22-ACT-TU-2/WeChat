@@ -75,7 +75,7 @@ Page({
       return
     }
     var addr = this.data.inputEmailAddress + "@buaa.edu.cn"
-    util.debug("submit email address: " + addr)
+    console.log("submit email address: " + addr)
     interact.submitEmailAddress(addr).then(
       (res) => {
         if (res.data.status == 0) {

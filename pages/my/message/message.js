@@ -464,6 +464,7 @@ Page({
             "message": "hello"
          }
          //app.sendRobotMsg(robotmsg);
+        /*
         app.ws.onMessage(function(data) {
             var r = JSON.parse(data.data)
             console.log('服务器返回的数据: ', r);
@@ -506,9 +507,11 @@ Page({
                 }
                 that.screenMsg(message)
             }
+            
             //app.message.push(r.message);
             //wx.setStorageSync('message', app.message)
         })
+        */
         this.setData({
             RECORDER:wx.getRecorderManager(),
             AUDIO:wx.createInnerAudioContext()
@@ -1076,6 +1079,8 @@ Page({
         // 发送消息
         self.screenMsg(msg);
         app.allMessage.push(history_message);
+        wx.setStorageSync('message', app.allMessage)
+        console.log("新发消息入缓存")
         /*
         setTimeout(() => {
             lastid = self.data.msgList[self.data.msgList.length - 1].msg.id;
@@ -1379,5 +1384,51 @@ Page({
     },
     discard() {
         return;
+    },
+    onMessage(data) {
+        var r = JSON.parse(data.data)
+        console.log('服务器返回的数据: ', r);
+        if(r.type == "new_message" && r.message.from_user == that.data.friendid){
+            let message = {
+                type: "user",
+                msg:{
+                    id: r.message.id,
+                    type: "text",
+                    time: r.message.created_time,
+                    userinfo: {
+                        uid: that.data.friendid,
+                        username: that.data.friendName,
+                        face: that.data.friendAvatar
+                    },
+                    content:{
+                        text: r.message.content
+                    }
+                }
+            }
+            app.sendReadMsg(that.data.friendid);
+            that.screenMsg(message)
+        }
+        else if(r.type == "chat_robot_reply"){
+            let message = {
+                type: "user",
+                msg:{
+                    id: 999,
+                    type: "text",
+                    time: nowDate.getHours() + ":" + nowDate.getMinutes(),
+                    userinfo: {
+                        uid: 999,
+                        username: "robot",
+                        face: "https://zhoukaiwen.com/img/qdpz/face/face_2.jpg"
+                    },
+                    content:{
+                        text: r.message
+                    }
+                }
+            }
+            that.screenMsg(message)
+        }
+        
+        //app.message.push(r.message);
+        //wx.setStorageSync('message', app.message)
     }
 })
