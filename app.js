@@ -93,8 +93,8 @@ App({
   // ws_werver: 'ws://127.0.0.1:8000/ws/',
   // ws_werver: 'wss://rs.test/ws/',
   // server : 'http://rs.test/',
-  server : 'http://114.116.194.3:8000/api/',
-  ws_werver: 'ws://114.116.194.3:8000/ws/',
+  server : 'https://acttu2.2022martu1.cn/api/',
+  ws_werver: 'wss://acttu2.2022martu1.cn/ws/',
   
 
   shareData : {

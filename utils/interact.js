@@ -1293,7 +1293,7 @@ module.exports.show = function() {
   return new Promise((resolve, reject) => {
     wx.request({
       // url: 'https://www.reedsailing.xyz/api/show/',
-      url: 'http://114.116.194.3:8000/api/show/',
+      url: 'https://acttu2.2022martu1.cn/api/show/',
       method: 'GET',
       success : result => {
         resolve(result)
