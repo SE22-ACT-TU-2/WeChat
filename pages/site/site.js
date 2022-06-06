@@ -414,130 +414,135 @@ Page({
     },
 
     post() {
-      if(this.data.identity=="请选择预约者身份") {
-        wx.showToast({
-          title : "未选择身份",
-          icon : "none"
-        })
-      } else if (this.data.identity=="个人") {
-        var success = -1;
-        var item = this.data.list[0];
-          if(item.area1=="请选择区域") {
-            wx.showToast({
-              title: '未选择区域',
-              icon : "none"
-            })
-          } else if(item.area2=="请选择场地") {
-            wx.showToast({
-              title: '未选择场地',
-              icon : "none"
-            })
-          } else if(item.date=="请选择日期") {
-            wx.showToast({
-              title: '未选择日期',
-              icon : "none"
-            })
-          } else if(item.begin_time==0) {
-            wx.showToast({
-              title: '未选择起始时间',
-              icon : "none"
-            })
-          } else if(item.end_time==0) {
-            wx.showToast({
-              title: '未选择结束时间',
-              icon : "none"
-            })
-          } else if(item.begin_time>=item.end_time) {
-            wx.showToast({
-              title: '结束时间不能小于起始时间',
-              icon : "none"
-            })
-          } else {
-            success = 1
-          }
-        
-        if(success == 1) {
-          var mes = {
-            user_id : app.loginData.userId,
-            identity : this.data.identity=="组织者"?1:0,
-            file : this.data.file,
-            ground_times : this.data.list
-          }
-          interact.booksite(mes).then(
-            (res) => {
-              wx.showToast({
-                title: res.data.msg,
-                icon: 'none',
-              })
-            }
-          )
-        }
+      if (!app.haveRegistered()) {
+        app.goCertificate();
       } else {
-        var success;
-        var item;
-        for(item of this.data.list) {
-          success = 1;
-          if(item.area1=="请选择区域") {
-            wx.showToast({
-              title: '未选择区域',
-              icon : "none"
-            })
-            success  = -1;
-            break;
-          } else if(item.area2=="请选择场地") {
-            wx.showToast({
-              title: '未选择场地',
-              icon : "none"
-            })
-            success  = -1;
-            break;
-          } else if(item.date=="请选择日期") {
-            wx.showToast({
-              title: '未选择日期',
-              icon : "none"
-            })
-            success  = -1;
-            break;
-          } else if(item.begin_time==0) {
-            wx.showToast({
-              title: '未选择起始时间',
-              icon : "none"
-            })
-            success  = -1;
-            break;
-          } else if(item.end_time==0) {
-            wx.showToast({
-              title: '未选择结束时间',
-              icon : "none"
-            })
-            success  = -1;
-            break;
-          } else if(item.begin_time>=item.end_time) {
-            wx.showToast({
-              title: '结束时间不能小于起始时间',
-              icon : "none"
-            })
-            success  = -1;
-            break;
-          }
-        }
-        if(success == 1) {
-          var mes = {
-            user_id : app.loginData.userId,
-            identity : this.data.identity=="组织者"?1:0,
-            file : this.data.file,
-            ground_times : this.data.list
-          }
-          interact.booksite(mes).then(
-            (res) => {
+        if(this.data.identity=="请选择预约者身份") {
+          wx.showToast({
+            title : "未选择身份",
+            icon : "none"
+          })
+        } else if (this.data.identity=="个人") {
+          var success = -1;
+          var item = this.data.list[0];
+            if(item.area1=="请选择区域") {
               wx.showToast({
-                title: res.data.msg,
-                icon: 'none',
+                title: '未选择区域',
+                icon : "none"
               })
+            } else if(item.area2=="请选择场地") {
+              wx.showToast({
+                title: '未选择场地',
+                icon : "none"
+              })
+            } else if(item.date=="请选择日期") {
+              wx.showToast({
+                title: '未选择日期',
+                icon : "none"
+              })
+            } else if(item.begin_time==0) {
+              wx.showToast({
+                title: '未选择起始时间',
+                icon : "none"
+              })
+            } else if(item.end_time==0) {
+              wx.showToast({
+                title: '未选择结束时间',
+                icon : "none"
+              })
+            } else if(item.begin_time>=item.end_time) {
+              wx.showToast({
+                title: '结束时间不能小于起始时间',
+                icon : "none"
+              })
+            } else {
+              success = 1
             }
-          )
+          
+          if(success == 1) {
+            var mes = {
+              user_id : app.loginData.userId,
+              identity : this.data.identity=="组织者"?1:0,
+              file : this.data.file,
+              ground_times : this.data.list
+            }
+            interact.booksite(mes).then(
+              (res) => {
+                wx.showToast({
+                  title: res.data.msg,
+                  icon: 'none',
+                })
+              }
+            )
+          }
+        } else {
+          var success;
+          var item;
+          for(item of this.data.list) {
+            success = 1;
+            if(item.area1=="请选择区域") {
+              wx.showToast({
+                title: '未选择区域',
+                icon : "none"
+              })
+              success  = -1;
+              break;
+            } else if(item.area2=="请选择场地") {
+              wx.showToast({
+                title: '未选择场地',
+                icon : "none"
+              })
+              success  = -1;
+              break;
+            } else if(item.date=="请选择日期") {
+              wx.showToast({
+                title: '未选择日期',
+                icon : "none"
+              })
+              success  = -1;
+              break;
+            } else if(item.begin_time==0) {
+              wx.showToast({
+                title: '未选择起始时间',
+                icon : "none"
+              })
+              success  = -1;
+              break;
+            } else if(item.end_time==0) {
+              wx.showToast({
+                title: '未选择结束时间',
+                icon : "none"
+              })
+              success  = -1;
+              break;
+            } else if(item.begin_time>=item.end_time) {
+              wx.showToast({
+                title: '结束时间不能小于起始时间',
+                icon : "none"
+              })
+              success  = -1;
+              break;
+            }
+          }
+          if(success == 1) {
+            var mes = {
+              user_id : app.loginData.userId,
+              identity : this.data.identity=="组织者"?1:0,
+              file : this.data.file,
+              ground_times : this.data.list
+            }
+            interact.booksite(mes).then(
+              (res) => {
+                wx.showToast({
+                  title: res.data.msg,
+                  icon: 'none',
+                })
+              }
+            )
+          }
         }
       }
+      
     },
 
     resetlist() {

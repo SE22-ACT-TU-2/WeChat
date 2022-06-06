@@ -55,25 +55,30 @@ Page({
    * 点击发布
    */
   sumitTopic() {
-    const content = this.data.content
-    console.log(content)
-    if (content==null) {
-      wx.showToast({
-        title: '内容不能为空',
-      })
-      return
-    }
-    console.log(this.data.labels)
-    interact.submittopic(content,this.data.labels).then(
-      (res) => {
+    if (!app.haveRegistered()) {
+      app.goCertificate();
+    } else {
+      const content = this.data.content
+      console.log(content)
+      if (content==null) {
         wx.showToast({
-          title:res.data.msg
+          title: '内容不能为空',
         })
-        wx.navigateBack({
-          delta: 0,
-        })
+        return
       }
+      console.log(this.data.labels)
+      interact.submittopic(content,this.data.labels).then(
+        (res) => {
+          wx.showToast({
+            title:res.data.msg
+          })
+          wx.navigateBack({
+            delta: 0,
+          })
+        }
     )
+    }
+    
   },
 
   onTagTap(e) {
