@@ -200,6 +200,7 @@ Page({
           arrayarea1 : res.data.area
         }
       )*/
+      
         let now = new Date();
         let year = now.getFullYear();
         let month = now.getMonth() + 1;
@@ -217,19 +218,22 @@ Page({
     },
     
     onShow: function() {
-      if (!app.haveRegistered()) {
-        app.goCertificate();
-      }
-      this.resetlist();
-      this.setData({
-        click: false,
-        identity: "请选择预约者身份",
-        file : "",
-        activeNames : [0],
-        same : false,
-        site : "请选择区域",
-        needdate: "请选择日期",
-      })
+      getApp().globalLogin().then(
+        (res)=>{
+          this.resetlist();
+          this.setData({
+            click: false,
+            identity: "请选择预约者身份",
+            file : "",
+            activeNames : [0],
+            same : false,
+            site : "请选择区域",
+            needdate: "请选择日期",
+          })
+        }
+        
+      )
+      
     },
 
     nextday: function() {
