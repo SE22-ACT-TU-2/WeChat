@@ -455,6 +455,9 @@ Page({
             friendAvatar:options.avatar,
             myuid:app.loginData.userId
         })
+        wx.setNavigationBarTitle({
+            title: this.data.friendName
+        })
         app.sendReadMsg(this.data.friendid);
         var nowDate = new Date();
         var that = this;
