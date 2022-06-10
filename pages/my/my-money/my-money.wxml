@@ -22,21 +22,24 @@
       <text class="userinfo-nickname">{{motto}}</text>
     </view>
   </view>
-
+<view>
   <i-panel i-class = "i_title" title="您的账户余额为：" hide-border = "{{true}}">
     <view class = "user_money" style="padding: 20px;"> {{money}}</view>
  </i-panel>
-
+</view>
+<view>
  <van-cell-group>
   <van-field
     value="{{ content }}"
     type = "textarea"
-    placeholder="充值金额"
+    placeholder="请输入充值金额"
     border="{{ true }}"
     clearable = "{{true}}"
+    autosize
     bind:change="contactHandler"
   />
 </van-cell-group>
+</view>
   <a class="weui-btn weui-btn_primary" bindtap="addMoney"
   >充值</a>
  

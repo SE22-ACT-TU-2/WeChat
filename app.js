@@ -308,7 +308,7 @@ App({
         timeout: 1000,
       })
       //连接成功
-      notification.onSocketOpen(function() {
+      notification.onOpen(function() {
         console.log("websocket连接服务器成功,notification")
         that.socketOpen = true
         wx.sendSocketMessage({
@@ -317,7 +317,7 @@ App({
       })
 
       //监听链接断开事件
-      notification.onSocketClose(function(res) {
+      notification.onClose(function(res) {
         console.log("notification连接断开:" + res.reason)
         that.socketOpen = false
       })
