@@ -163,15 +163,15 @@ App({
             })
             message.onOpen(function(res){
               console.log("message第一次连接成功")
+              that.ws = message
             })
-            this.ws = message
             message.onMessage(function(data) {
               var r = JSON.parse(data.data)
               console.log('服务器返回的数据: ', r);
               if(r.type == "ws_connected"){
               that.unreadMessage = r.messages;
               let unreadMsg = that.unreadMessage;
-              let allMsg = that.allMessage;
+              let allMsg = that.allMessage || [];
               for(let i = 0;i < unreadMsg.length;i++){
                 if(!allMsg.some(item =>{item.id == unreadMsg[i].id})){
                   console.log('加入一条未读消息' + i)
@@ -194,7 +194,7 @@ App({
           })
             message.onClose(function(res){
               wx.setStorageSync('message', that.allMessage);
-              console.log("第一次关闭socket")
+              console.log("第一次关闭socket" + res.reason)
             })
           }).catch((e) => {
             console.error(funcInfo.funcName + ': 未登录')
@@ -242,6 +242,7 @@ App({
     })
     message.onOpen(function(res){
       console.log("message再次连接成功")
+      that.ws = message
     })
     message.onMessage(function(data) {
       var r = JSON.parse(data.data)
@@ -270,7 +271,7 @@ App({
   })
     message.onClose(function(res){
       wx.setStorageSync('message', that.allMessage)
-      console.log("再次关闭socket")
+      console.log("再次关闭socket" + res.reason)
     })
   }
   },

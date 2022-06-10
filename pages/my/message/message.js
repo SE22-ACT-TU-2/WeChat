@@ -1389,6 +1389,7 @@ Page({
         return;
     },
     onMessage(data) {
+        var that = this;
         var r = JSON.parse(data.data)
         console.log('服务器返回的数据: ', r);
         if(r.type == "new_message" && r.message.from_user == that.data.friendid){

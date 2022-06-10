@@ -73,16 +73,20 @@
 </van-cell-group>
 </view>
 <view>
-    <button class="addbtn"  bindtap="addlist" style="width: 234rpx;  left: 2rpx; top: 37rpx">
-        添加表单
+    <button class="addbtn"  bindtap="addlist" style="width: 234rpx;  position:relative;left: 2rpx; top: 37rpx">
+        添加
     </button>
-    <button class="resetbtn" bindtap="resetlist" style="width: 234rpx;  left: -110rpx; top: 36rpx">
-        重置表单
+</view>
+<view>
+    <button class="resetbtn" bindtap="resetlist" style="width: 234rpx; position:relative;right: -110rpx; top: 37rpx; position: relative; left: -107rpx">
+        重置
     </button>
-    <button class="btn" bindtap="post" style="width: 234rpx; right: -8rpx; top: -44rpx; left: 16rpx; position: relative">
+</view>
+<view>
+    <button class="btn" bindtap="post" style="width: 234rpx; position: relative; left: 8rpx; top: -40rpx">
         提交
     </button>
-</view>    
+</view>  
 </view>
 <picker bindchange="bindPickerChange1"  value="{{index1}}" range='{{array}}' 
 		range-key="name"  data-id='{{array[index1].id}}' data-name='{{array[index1].name}}'>
