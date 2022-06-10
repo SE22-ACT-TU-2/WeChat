@@ -147,7 +147,7 @@
 
 
 .topic-list {
-  margin-top: 90rpx;
+  margin-top: 20rpx;
 }
 
 .topic-item {

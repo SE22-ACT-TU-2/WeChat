@@ -74,38 +74,43 @@ Page({
   onFollowTap() {
     const user = this.data.user
     var that = this
-    if (user.has_follow) {
-      wx.showModal({
-        content: '您确定要取消关注吗',
-        success: function (res) {
-          if (res.confirm) {//这里是点击了确定以后
-            interact.follow(user.id).then(
-              (res) => {
-                if(res.data.msg!=null) {
-                  user.has_follow = !user.has_follow
-                  user.follower--
-                  that.setData({
-                    user:user
-                  })
-                }
-              }
-            )
-          }
-        }
-      })
+    if (!app.haveRegistered()) {
+      app.goCertificate()
     } else {
-      interact.follow(user.id).then(
-        (res) => {
-          if(res.data.msg!=null) {
-            user.has_follow = !user.has_follow
-            user.follower++
-            that.setData({
-              user:user
-            })
+      if (user.has_follow) {
+        wx.showModal({
+          content: '您确定要取消关注吗',
+          success: function (res) {
+            if (res.confirm) {//这里是点击了确定以后
+              interact.follow(user.id).then(
+                (res) => {
+                  if(res.data.msg!=null) {
+                    user.has_follow = !user.has_follow
+                    user.follower--
+                    that.setData({
+                      user:user
+                    })
+                  }
+                }
+              )
+            }
           }
-        }
-      )
+        })
+      } else {
+        interact.follow(user.id).then(
+          (res) => {
+            if(res.data.msg!=null) {
+              user.has_follow = !user.has_follow
+              user.follower++
+              that.setData({
+                user:user
+              })
+            }
+          }
+        )
+      }
     }
+    
     
   },
 

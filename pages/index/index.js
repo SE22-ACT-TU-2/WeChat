@@ -14,7 +14,7 @@ Page({
         org_list : null,
         act_list : null,
         site_list : null,
-        current : "tab1",
+        current : "tab3",
         longitude: 116,
         latitude : 40,
         markers : [],
