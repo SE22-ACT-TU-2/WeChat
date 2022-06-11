@@ -3,7 +3,18 @@
 <!-- 话题发布 -->
 <scroll-view style="height: {{height}}px" scroll-y scroll-with-animation enable-back-to-top>
 	<text class="title">内容（必填）</text>
-	<i-input i-class="input-textarea" value="{{content}}" type="textarea" placeholder="输入您的交友期望" auto-focus="{{true}}" maxlength="300" bind:change="setContent"/>
+	<van-cell-group>
+  <van-field
+    value="{{ content }}"
+    type = "textarea"
+    placeholder="输入您的交友期望"
+    autosize
+    border="{{ true }}"
+    clearable = "{{true}}"
+    bind:change="setContent"
+    maxlength = "300"
+  />
+</van-cell-group>
 
 	<text wx:if="{{labels.length > 0}}" class="title">标签</text>
 	<view wx:if="{{labels.length > 0}}" class="tag-items">
