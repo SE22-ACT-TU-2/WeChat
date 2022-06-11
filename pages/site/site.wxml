@@ -67,6 +67,7 @@
     placeholder="请输入预约理由"
     border="{{ true }}"
     clearable = "{{true}}"
+    maxlength = "30"
     autosize
     bind:change="changeReason"
   />
