@@ -6,7 +6,7 @@
 </i-tabs>
 <view wx:if="{{current == 'tab1'}}">
         <view wx:for = "{{success}}" wx:key="index">
-            <i-card title="{{item.area2}}" extra="{{item.date}}" thumb="/icon/newnorth.webp">
+            <i-card title="{{item.area2}}" extra="{{item.date}}" thumb="{{item.avatar}}">
              <view slot="content">
                 <view>
                 预约时间：{{item.begin_time}}点-{{item.end_time}}点； 身份：{{item.identity==0?"个人":"组织者"}}
@@ -35,7 +35,7 @@
 
 <view wx:if="{{current == 'tab2'}}">
         <view wx:for = "{{checking}}" wx:key="index">
-            <i-card title="{{item.area2}}" extra="{{item.date}}" thumb="/icon/beihang_background.png">
+            <i-card title="{{item.area2}}" extra="{{item.date}}" thumb="{{item.avatar}}">
              <view slot="content">
                 <view>
                 预约时间：{{item.begin_time}}点-{{item.end_time}}点；身份：{{item.identity==0?"个人":"组织者"}}
@@ -64,7 +64,7 @@
 
 <view wx:if="{{current == 'tab3'}}">
         <view wx:for = "{{invalid}}" wx:key="index">
-            <i-card title="{{item.area2}}" extra="{{item.date}}" thumb="/icon/beihang_background.png">
+            <i-card title="{{item.area2}}" extra="{{item.date}}" thumb="{{item.avatar}}">
              <view slot="content">
                 <view>
                 预约时间：{{item.begin_time}}点-{{item.end_time}}点；身份：{{item.identity==0?"个人":"组织者"}}
